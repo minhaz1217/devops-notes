@@ -1,3 +1,6 @@
+# Lookup domain names
+## [bgp.he.net](bgp.he.net)
+
 # Get network interfaces or see ip
 `ifconfig`
 
@@ -35,6 +38,5 @@ Now we can see the traffics.
 
 # Check for open port
 `telnet 204.79.197.200 80`
-
 
 
