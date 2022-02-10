@@ -82,6 +82,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 
 # To get a better understanding of the network traffic.
+![Docker bridge network traffic flow](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/images/how_bridge_network_works.png "Docker bridge network traffic flow").
+
 ## Open 2 shells from the host pc and run
 `sudo tcpdump -i eth0 | grep HTTP`
 
