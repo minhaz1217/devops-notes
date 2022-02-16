@@ -256,46 +256,121 @@ FH: `curl localhost`
 
 ## 31. To pass from one network to another, write the command?
 
+`tcpdump src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16`
+
 ## 32. If a non ICMP traffic goes to a specific IP, what should be the query?
+
+`tcpdump dst 192.168.0.2 and src net and not icmp`
 
 ## 33. If a host isn't on a specific port, what will be tweaked and commanded?
 
+`tcpdump -vv src host and not dst port 22`
+
 ## 34. Why single quotes are used?
+
+`tcpdump 'src 10.0.2.4 and (dst port 3389 or 22)'`
+
+single quotes are used for ignoring special characters. Like the `'('` and `')'` in this case.
 
 ## 35. How to isolate TCP RST flags?
 
+`tcpdump 'tcp[13] & 4!=0'`
+
+`tcpdump 'tcp[tcpflags] == tcp-rst'`
+
+** RST flag means reset flag. Some routers send it when a connection has been idle for some time.
+
 ## 36. To isolate TCP SYN flags, which query is used?
+
+`tcpdump 'tcp[13] & 2!=0'`
+
+`tcpdump 'tcp[tcpflags] == tcp-syn'`
+
+** SYN flag means synchronize message.
 
 ## 37. To isolate packets that have both the SYN and ACK flags set, what should be the command?
 
+`tcpdump 'tcp[13]=18'`
+
 ## 38. How to isolate TCP URG flags?
 
+`tcpdump 'tcp[13] & 32!=0'`
+
+`tcpdump 'tcp[tcpflags] == tcp-urg'`
 ## 39. How to isolate TCP ACK flags?
 
-## 40. How to isolate TCP PSH flags?
+`tcpdump 'tcp[13] & 16!=0'`
 
+`tcpdump 'tcp[tcpflags] == tcp-ack'`
+## 40. How to isolate TCP PSH flags?
+`tcpdump 'tcp[13] & 8!=0'`
+
+`tcpdump 'tcp[tcpflags] == tcp-push'`
 ## 41. How to isolate TCP FIN flags?
 
+`tcpdump 'tcp[13] & 1!=0'`
+
+`tcpdump 'tcp[tcpflags] == tcp-fin'`
+
 ## 42. How is GREP used with TCPDUMP?
+By using the `-l` and piping output to grep.
 
 ## 43. Command for both SYN and RST flags?
+`tcpdump 'tcp[13] = 6'`
 
 ## 44. What to do for cleartext GET requests?
+`tcpdump -vvAls0 | grep 'GET'`
+
+FC: `tcpdump -vvAls0 | grep 'GET'`
+
+FH: `curl localhost`
+
+![see get request](images/solution_44.png "see get request")
+
 
 ## 45. What to do to find HTTP host headers?
+`tcpdump -vvAls0 | grep 'Host:'`
+
+FC: `tcpdump -vvAls0 | grep 'Host:'`
+
+FH: `curl localhost`
+
+![host headers](images/solution_45.png "host headers")
 
 ## 46. How to find HTTP cookies?
 
+`tcpdump -vvAls0 | grep 'Set-Cookie|Host:|Cookie:'`
+
 ## 47. The command line for find SSH connections?
+`tcpdump 'tcp[(tcp[12]>>2):4] = 0x5353482D'`
+
+`tcpdump port 22`
 
 ## 48. How to find DNS traffic?
 
+`tcpdump -vvAs0 port 53`
+
 ## 49. Command for finding FTP traffic?
+
+`tcpdump -vvAs0 port 21`
 
 ## 50. Find NTP traffic, what is the command?
 
+`tcpdump -vvAs0 port 123`
+
 ## 51. Command to find cleartext passwords?
+
+`tcpdump port http or port ftp or port smtp or port imap or port pop3 or port telnet -lA | egrep -i -B5 'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|passwd= |password=|pass:|user:|username:|password:|login:|pass |user '`
 
 ## 52. Describe EVIL bit.
 
-## 53. Write the fun filter to find packets where it's been toggled?
+An evil bit is a bit that never gets set by legitimate appliaction. 
+
+## 53. Write the filter to find packets where it's been toggled?
+
+`tcpdump 'ip[6] & 128 != 0'`
+
+# Useful links
+## [The blog](https://danielmiessler.com/study/tcpdump/#useragent)
+
+
