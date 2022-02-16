@@ -370,6 +370,56 @@ An evil bit is a bit that never gets set by legitimate appliaction.
 
 `tcpdump 'ip[6] & 128 != 0'`
 
+# TCPDUMP flags cheatsheet
+`-D` Show list of available interfaces that tcpdump can listen to
+
+`-i eth0` or `-i any` Listen to interface
+
+`-e` Print link level header
+
+`-q` Show less verbose output
+
+`-v` Show more verbose output. For example, **the time to live**, **identification**, **total length** and **options** in an IP packet are printed. Also enables additional packet integrity checks such as verifying the IP and ICMP header checksum.
+
+`-vv` Show even more output. For example, additional fields are printed from **NFS reply** packets, and **SMB packets** are fully decoded.
+
+`-vvv` Be very verbose while capturing packets: For example, telnet SB ... SE options are printed in full.
+
+`-n` No reverse DNS lookup for domain name. But resolves service name for ports.
+
+`-nn` Don't resolve hostname or port names.
+
+`-S` Print absolute sequence numbers.
+
+`-s` Buffer limit. `-s0` For all bytes. `-s 500` Capture 500 bytes of data for each packet rather than the default of 68 bytes.
+
+`-c` Limit the capture count.
+
+`-x` Print the basic headers, plus print the data of each packet in hex, excluding the link level header.
+
+`-xx` Print the basic headers, plus print the data of each packet in hex, including its link level header, in hex.
+
+`-X` Print the data of each packet in both hex and ASCII, excluding the link level header
+
+`-XX` Print the data of each packet in both hex and ASCII, also including the link level header.
+
+`-A` Print each packet as ascii.
+
+`-b` Print the AS number in BGP packets in ASDOT noation rather than ASPLAIN notation.
+
+`-l` Line readable output.
+
+`-t` or `-tttt` Give human readable timesteamp.
+
+`-E` decrypt IPSEC traffic by providing encryption key.
+
+`-w` To write to file
+
+`-r` To read from file.
+
+
+
+
 # Useful links
 ## [The blog](https://danielmiessler.com/study/tcpdump/#useragent)
 
