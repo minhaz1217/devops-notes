@@ -1,0 +1,13 @@
+{
+    "name": "simple_nodejs_docker_app",
+    "version": "1.0.0",
+    "description": "Simple dockerfile for running nodejs app",
+    "author": "Minhazul Hayat Khan <minhaz1217@gmail.com>",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1"
+    }
+  }
