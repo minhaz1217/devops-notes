@@ -8,6 +8,8 @@ Unzip the package
 
 `tar xvzf coredns_1.9.0_linux_amd64.tgz`
 
+Or pick appropriate version for your use from this [Coredns download](https://github.com/coredns/coredns/releases/latest)
+
 # Run and test coredns
 
 Now run coredns using this command
@@ -128,3 +130,9 @@ Check that the configuration and plugins are working by running this
 `dig example.com`
 
 Notice that the output is 192.168.1.10
+
+
+## External resources.
+[https://github.com/coredns/coredns](https://github.com/coredns/coredns)
+
+[https://stackoverflow.com/questions/53075796/coredns-pods-have-crashloopbackoff-or-error-state/53414041#53414041](https://stackoverflow.com/questions/53075796/coredns-pods-have-crashloopbackoff-or-error-state/53414041#53414041)
