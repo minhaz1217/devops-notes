@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  web1:
+    image: "nginx"
+  web2:
+    image: "nginx"
+  redis:
+    image: "redis:alpine"
