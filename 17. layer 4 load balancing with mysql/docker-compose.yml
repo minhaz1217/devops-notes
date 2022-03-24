@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  db1:
+    build: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    networks:
+      - layer4_loadbalancing
+
+  db2:
+    build: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    networks:
+      - layer4_loadbalancing
+
+  loadbalancer:
+    build: loadbalancer
+    ports:
+      - 3306:3306
+    networks:
+      - layer4_loadbalancing
+
+networks:
+  layer4_loadbalancing:
+    name: layer4_loadbalancing
