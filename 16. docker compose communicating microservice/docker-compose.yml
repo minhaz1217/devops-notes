@@ -12,6 +12,14 @@ services:
     networks:
       - multiple_microservices
 
+  loadbalancer:
+    container_name: loadbalancer
+    build: loadbalancer
+    networks:
+      - multiple_microservices
+    ports:
+      - 3000:80
+
   redis:
     container_name: redis
     image: "redis:alpine"
