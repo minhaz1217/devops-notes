@@ -87,6 +87,10 @@ http {
 ## Run the live using ffmpeg
 `ffmpeg -re -i video.mp4 -vcodec copy -loop -1 -c:a aac -b:a 160k -ar 44100 -strict -2 -f flv rtmp://<your_ip_address>/live/stream-name`
 
+## Connect to the stream via any network streaming software, we use VLC media player.
+`https://www.videolan.org/vlc/`
+## Paste your url in `Media > Open Network Stream` or `ctrl + n` shortcut
+
 
 ## Reference
 https://www.nginx.com/blog/video-streaming-for-remote-learning-with-nginx/
