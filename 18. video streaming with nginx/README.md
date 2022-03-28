@@ -91,6 +91,12 @@ http {
 `https://www.videolan.org/vlc/`
 ## Paste your url in `Media > Open Network Stream` or `ctrl + n` shortcut
 
+<br><br>
+
+#### To increase the file size of any video use this. It loops the video 2 times and output the file in the output.mp4 file.
+`ffmpeg -stream_loop -2 -i video.mp4 -c copy output.mp4`
+
+<br><br>
 
 ## Reference
 https://www.nginx.com/blog/video-streaming-for-remote-learning-with-nginx/
