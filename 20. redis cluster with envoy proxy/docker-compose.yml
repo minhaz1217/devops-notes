@@ -1,18 +1,28 @@
 version: '3.7'
 services:
   envoy_redis_1:
+    container_name: envoy_redis_1
     image: redis:5.0.3-alpine
     expose:
       - 6379
+    networks:
+      - redis_envoy
   envoy_redis_2:
+    container_name: envoy_redis_2
     image: redis:5.0.3-alpine
     expose:
       - 6379
+    networks:
+      - redis_envoy
   envoy_redis_3:
+    container_name: envoy_redis_3
     image: redis:5.0.3-alpine
     expose:
       - 6379
+    networks:
+      - redis_envoy
   proxy:
+    container_name: envoy_proxy
     build:
       context: .
       dockerfile: Dockerfile
@@ -25,3 +35,9 @@ services:
       - envoy_redis_1
       - envoy_redis_2
       - envoy_redis_3
+    networks:
+      - redis_envoy
+
+networks:
+  redis_envoy:
+    name: redis_envoy
