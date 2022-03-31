@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  envoy_redis_1:
+    image: redis:5.0.3-alpine
+    expose:
+      - 6379
+  envoy_redis_2:
+    image: redis:5.0.3-alpine
+    expose:
+      - 6379
+  envoy_redis_3:
+    image: redis:5.0.3-alpine
+    expose:
+      - 6379
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+     - 6379:6379
+     - 8001:8001
+    expose:
+      - 6379
+    depends_on:
+      - envoy_redis_1
+      - envoy_redis_2
+      - envoy_redis_3
