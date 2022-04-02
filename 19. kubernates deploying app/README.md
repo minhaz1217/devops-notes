@@ -11,6 +11,9 @@ The purpose of this note is to get up and running with kubernates using k3s. Lun
 ## Check that the installation was successful
 `k3s kubectl get node`
 
+## Get kubernates client version
+`kubectl version --client`
+
 ## See cluster info using this
 `kubectl cluster-info`
 
@@ -25,6 +28,9 @@ The purpose of this note is to get up and running with kubernates using k3s. Lun
 
 ## Describe node
 `kubectl describe node <node name>`
+
+## To get all the information
+`kubectl cluster-info dump`
 
 <!-- ## To install bash completion use
 `apt-get install bash-completion -y`
@@ -54,25 +60,52 @@ Note the external ip of nginx-http2
 ## Now use curl to verify that it is working
 `curl localhost:80`
 
+### To reset kubectl, delete all the things we've done so far use this
+```
+kubectl delete service nginx-http2
+
+kubectl delete pod nginx
+```
 
 # Using replication controller
+
+## Download the replication controller config file
+`wget https://raw.githubusercontent.com/minhaz1217/devops-notes/master/19.%20kubernates%20deploying%20app/nginx-replication-controller.yaml`
+
+## Run this to create the replication controller
+`kubectl create -f nginx-replication-controller.yaml`
+
+## To see the replication controller use this
+`kubectl get rc`
+
+## Use this to see the pods
+`kubectl get pods`
+
+## Delete one of the pods an see that the replication controller will spin up another
+`kubectl delete pod nginx-<custom key>`
+
+`kubectl get pods`
+
+## Create a service to access the replication controller
 `kubectl expose rc nginx --type=LoadBalancer --name nginx-http`
 
-kubectl create service clusterip my-svc --clusterip="None" -o yaml --dry-run=client > srv.yaml
-kubectl create --edit -f srv.yaml
+## Use this and get the external ip of the service
+`kubectl get service`
 
-kubectl run curl --image=nginx-service:curl -i --tty
+## Curl to the external ip
+`curl localhost`
 
-`kubectl expose rc nginx --type=LoadBalancer --name nginx-http`
-
-`kubectl get replicationcontrollers`
-
+## Now we scale down the replicas
 `kubectl scale rc nginx --replicas=1`
 
+## Watch that the pods have been scaled down
+`kubectl get pods`
+
+## Now we scale up the replicas
+`kubectl scale rc nginx --replicas=5`
+
+## Watch that the pods have been created
 `kubectl get pods -o wide`
 
-`kubectl describe pod nginx-td7cf`
-
-`sudo kubectl version --client`
-
-`kubectl cluster-info dump`
+## Curl to the external ip again
+`curl localhost`
