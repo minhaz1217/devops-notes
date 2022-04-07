@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name : layer-7-load-balancing
+spec:
+  containers:
+  - image: minhaz1217/i_23_loadbalancer
+    name: loadbalancer
+    ports:
+    - containerPort: 80
+      protocol: TCP
+
+  - image: redis
+    name: redis
+    ports:
+    - containerPort: 6379
+      protocol: TCP
+      
+  - image: minhaz1217/i_23_microservice1
+    name: microservice1
+    ports:
+    - containerPort: 5001
+      protocol: TCP
+      
+  - image: minhaz1217/i_23_microservice2
+    name: microservice1
+    ports:
+    - containerPort: 5002
+      protocol: TCP
+      
+  - image: minhaz1217/i_23_microservice3
+    name: microservice1
+    ports:
+    - containerPort: 5003
+      protocol: TCP
+      
