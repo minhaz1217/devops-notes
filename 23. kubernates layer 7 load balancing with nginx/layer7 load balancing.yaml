@@ -23,13 +23,13 @@ spec:
       protocol: TCP
       
   - image: minhaz1217/i_23_microservice2
-    name: microservice1
+    name: microservice2
     ports:
     - containerPort: 5002
       protocol: TCP
       
   - image: minhaz1217/i_23_microservice3
-    name: microservice1
+    name: microservice3
     ports:
     - containerPort: 5003
       protocol: TCP
