@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-nginx
+spec:
+  ports:
+    - port: 3000
+      targetPort: 80
+      name: nginx-port
+  selector:
+    purpose: nginx-redis

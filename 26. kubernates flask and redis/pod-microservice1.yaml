@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name : microservice1
+spec:
+  containers:
+  - image: minhaz1217/26-microservice1
+    name: microservice1
+    ports:
+    - containerPort: 5001
+      protocol: TCP
