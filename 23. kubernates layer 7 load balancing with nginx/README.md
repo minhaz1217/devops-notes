@@ -1,6 +1,12 @@
 # Purpose
 Here we will build a layer 7 loadbalancer using nginx and use 3 python servers in a single pod.
 
+We are trying to simulate this architecture
+
+![layer 7 load balancing inside a single pod](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/23.%20kubernates%20layer%207%20load%20balancing%20with%20nginx/images/layer%207%20load%20balancing%20inside%20a%20pod.png)
+
+!! WARNING !! - This way of architecturing this many containers inside a single pod is **bad**. We are doing it like this just for **demonstration**.
+
 ## Build all the images using
 ```
 docker build -t minhaz1217/i_23_loadbalancer loadbalancer
