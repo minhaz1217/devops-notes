@@ -60,10 +60,50 @@ Containers inside a pod share same namespace, so they share ip addresses and por
 ### Filter by pod that **doesn't** have that label
 `kubectl get pod -l '!env'`
 
+### Add label to a node
+`kubectl label node <node_name> gpu=true`
 
+### Verify that the node with gpu map and true value is there
+`kubectl get nodes -l gpu=true`
 
-`kubectl label node docker-desktop gpu=true`
+### Now we can bind our pod to this node
+`kubectl create -f '.\bind pod to a nod.yaml'`
+
+warning: if the pod doesn't find any node that matches the specified binding, it won't be up.
+
+### Adding and modifying annotations
+`kubectl annotate pod <pod_name> minhazul.com/someannotation="annotation value"`
+
+## Namespace
+
+### Get list of namespaces
+`kubectl get ns`
+
+### Get pod in that namespace
+`kubectl get pod -n <namespace_name>`
+
+`kubectl get pod --namespace <namespace_name>`
+
+### Create a namespace
+`kubectl create -f basic_namespace.yaml`
 
 `kubectl create namespace api`
 
-`kubectl get pods -n api`
+### Create a pod in a namespace
+`kubectl create -f pod.yaml -n api`
+
+## Deleting
+
+### Deleting a pod
+`kubectl delete pod <pod_name>`
+
+`kubectl delete pod --all`
+
+### Delete pod with label selector
+`kubectl delete pod -l env=testing`
+
+### Delete a namespace
+`kubectl delete ns api`
+
+### Delete namespace and everything on it
+`kubectl delete all --all`
