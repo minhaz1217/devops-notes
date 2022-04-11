@@ -34,6 +34,9 @@ Containers inside a pod share same namespace, so they share ip addresses and por
 ### Send traffic to a pod
 `kubectl port-forward nginx 8080:80`
 
+### See logs of previously crashed pod
+`kubectl logs <pod_name> --previous`
+
 ## Labels
 
 ### See labels of a pod
@@ -107,3 +110,19 @@ warning: if the pod doesn't find any node that matches the specified binding, it
 
 ### Delete namespace and everything on it
 `kubectl delete all --all`
+
+## Liveness Probe
+Liveness probe makes request to a given endpoint and after multiple failure automatically restarts the container.
+
+### Run a pod using 
+`kubectl create -f liveliness-probe.yaml`
+
+This pod crashes after 5 hit to the / endpoint. 
+
+### Use this to see that the liveness probe failed
+`kubectl describe pod liveness`
+
+### After some time run this
+`kubectl logs liveness --previous`
+
+
