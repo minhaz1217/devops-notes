@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: loadbalancer-rc
+spec:
+  replicas: 1
+  
+  selector:
+    app: loadbalancer
+
+  template:
+    metadata:
+      labels:
+        app: loadbalancer
+    spec:
+      containers:
+        - name: loadbalancer
+          image: minhaz1217/24-lb
+          ports:
+            - containerPort: 80

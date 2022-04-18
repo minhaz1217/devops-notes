@@ -1,0 +1,9 @@
+piVersion: v1
+kind: Service
+metadata:
+  name: external-service
+spec:
+  type: ExternalName
+  externalName: loadbalancer
+  ports:
+    - port: 80
