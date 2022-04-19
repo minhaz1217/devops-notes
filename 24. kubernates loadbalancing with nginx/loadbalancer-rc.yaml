@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: loadbalancer-rc
 spec:
-  replicas: 1
+  replicas: 3
   
   selector:
     app: loadbalancer
