@@ -2,7 +2,7 @@
 Here we will be load balancing to two difference services using FQDN and using nginx to load balance between the 2 services.
 
 # Architecture
-![Load balance between services using nginx](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/24.%20kubernates%20loadbalancing%20with%20nginx%5Cimages%5Cload%20balancing%20with%20kubernates%20and%20nginx.png)
+![Load balance between services using nginx](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/24.%20kubernates%20loadbalancing%20with%20nginx/images/load%20balancing%20with%20kubernates%20and%20nginx.png)
 
 # Steps
 ### First we bring up the two servers using replication controller
