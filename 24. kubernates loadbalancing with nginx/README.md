@@ -65,3 +65,14 @@ Note the `External-IP`.
 `curl localhost:3001`
 
 ![load balancer correctly redirecting](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/24.%20kubernates%20loadbalancing%20with%20nginx/images/09_load%20balancing%20working.png)
+
+
+## Delete everything we've done so far (restore your kubectl to just like before we started)
+```
+kubectl delete rc server1-rc
+kubectl delete rc server2-rc
+kubectl delete rc loadbalancer-rc
+kubectl delete svc server1-svc
+kubectl delete svc server2-svc
+kubectl delete svc loadbalancer-svc
+```
