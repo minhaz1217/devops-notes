@@ -89,14 +89,26 @@ sudo apt-get update -y
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
+
+## Do these in master node
 <!-- IPADDR="10.10.10.100" -->
+### See the ip address of eth0 using
+`ifconfig`
+set the ipv4 address as the `IPADDR`
 ### Setup environment variables for node setup
 ```
-IPADDR="<master_node_ip>"
+IPADDR="<master_node's_eth0's_ip>"
 NODENAME=$(hostname -s)
 ```
+NODENAME=master-node-01
+IPADDR=10.10.12.94
 
-`sudo kubeadm init --apiserver-advertise-address=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=192.168.0.0/16 --node-name $NODENAME --ignore-preflight-errors Swap`
+
+
+### (optional) In ec2 we may need to add the NODENAME in the hosts file
+`sudo nano /etc/hosts`
+
+`sudo kubeadm init --apiserver-advertise-address=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=192.168.0.0/16 --node-name $NODENAME --ignore-preflight-errors Swap --v=5`
 <!-- `curl -fsL https://raw.githubusercontent.com/minhaz1217/linux-configurations/master/bash/03.%20installing%20docker/install_docker.sh | bash -` -->
 
 ### To use kubectl do this as normal user
@@ -109,7 +121,7 @@ or if this error occurs when trying any kubectl command `The connection to the s
 
 
 ### Create a token for worker nodes to connect
-`kubeadm token create --print-join-command`
+`sudo kubeadm token create --print-join-command`
 
 ## If anything bad happens during kubeadm init or join we can reset by using
 ```
@@ -117,6 +129,7 @@ rm /etc/kubernetes/kubelet.conf
 rm -rf /etc/kubernetes/pki
 systemctl stop kubelet
 ```
+`sudo kubeadm reset`
 
 ## Do these to setup the worker node
 `NODENAME=$(hostname -s)`
@@ -149,5 +162,25 @@ We'll notice that the error is **container runtime network not ready: NetworkRea
 
 We'll see that 2 coredns pods are showing status pending.
 
+### To solve these we'll install a network plugin named Calico
+
+## Setting up network plugin
+### Download the calico plugin
+`curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O`
+
+### Apply it
+`kubectl apply -f calico.yaml`
+
+If default configuration is changed we may need to follow calico plugin's installation guide
+
+### Now if we get nodes we'll see status **Ready**
+`kubectl get nodes`
+
+### We can get kube system pods using
+`kubectl get pods -n kube-system`
+
+
 ## Reference
 [https://devopscube.com/setup-kubernetes-cluster-kubeadm/](https://devopscube.com/setup-kubernetes-cluster-kubeadm/)
+
+[https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises](https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises)
