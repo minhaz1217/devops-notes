@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+    config.vm.box = "bento/ubuntu-20.04"
+    config.vm.hostname = "master-node-01"
+    # config.disksize.size = '10GB'
+    config.vm.synced_folder "D:/MyComputer/website", "/home/vagrant/website",
+        owner: "vagrant",
+        group: "vagrant",
+        mount_options: ["dmode=775,fmode=664"]
+    config.vm.network "private_network", ip: "10.10.10.100"
+  
+    config.vm.provider "virtualbox" do |vb|
+  #    vb.gui = true
+        vb.memory = 4096
+        vb.cpus = 4
+    end
+    
+    config.vm.provision "shell", inline: <<-SHELL
+      # installing ansible
+      # sudo apt-get update
+      # sudo apt-get install software-properties-common
+      # sudo apt-add-repository --yes --update ppa:ansible/ansible
+      # sudo apt-get install ansible --yes
+    SHELL
+  end
+  
