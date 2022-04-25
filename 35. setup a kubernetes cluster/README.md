@@ -1,14 +1,19 @@
+# Purpose
+Here we manually deploy a kubernetes cluster ourselves. And deploy our app in that cluster.
 
-## Setup vagrant (optional)
-
-### Install vagrant using
-[https://www.vagrantup.com/docs/installation](https://www.vagrantup.com/docs/installation)
-
-### At first set the hypervisorlaunchtype to off
+# Pre Requisites
+### In windows machine we may need to set the hypervisorlaunchtype to off
 `bcdedit /set hypervisorlaunchtype off`
 
 Then restart, **You might need to restart 2 times.
+**Caution**: After doing this docker and WSL will stop working.
+
 # Manual setup
+## Setup vagrant (optional)
+### Install vagrant using
+[https://www.vagrantup.com/docs/installation](https://www.vagrantup.com/docs/installation)
+
+
 ## Setting up vagrant VMs
 ### Bring up all the necessary VMs
 ```
@@ -20,15 +25,19 @@ cd ../worker-node-02
 vagrant up
 ```
 
-### SSH into the vagrant box using 
+### SSH into the vagrant boxes using 
 `vagrant ssh`
 
-### At first make sure that the worker node and master nodes can communicate
+## At first make sure that the worker node and master nodes can communicate
 From master node
+
 `ping <worker_node_ip>`
+
 From worker nodes
+
 `ping <master_node_ip>`
-** You may need to enable ICMP traffic from the security group.
+
+** You may need to enable ICMP traffic from the security group for aws ec2.
 
 
 ## Do this on both the worker and master nodes
@@ -174,6 +183,8 @@ We'll see that 2 coredns pods are showing status pending.
 ### To solve these we'll install a network plugin named Calico
 
 ## Setting up network plugin
+There are many plugins 3 most popular are `flanel`, `calio` or `weave`
+
 ### Download the calico plugin
 `curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O`
 
@@ -187,6 +198,72 @@ If default configuration is changed we may need to follow calico plugin's instal
 
 ### We can get kube system pods using
 `kubectl get pods -n kube-system`
+
+# Testing
+### Paste these
+`nano rc.yaml`
+```
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: microservice
+spec:
+  replicas: 3
+  selector:
+    app: microservice
+  template:
+    metadata:
+      name: microservice
+      labels:
+        app: microservice
+    spec:
+      containers:
+      - name: microservice
+        image: minhaz1217/simple-dotnet
+        ports:
+        - containerPort: 80
+```
+
+### Create the replication controller using
+`kubectl create -f rc.yaml`
+
+### Make sure the pods are running using
+`kubectl get pods`
+
+### We can see that the pods are running in our worker nodes using
+`kubectl describe pods`
+
+### Now create a nodeport service to expose our pods using
+`nano nodeport.yaml`
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30123
+  selector:
+    app: microservice
+```
+
+### Create the nodeport using
+`kubectl create -f nodeport.yaml`
+
+### Curl to the external port using
+`curl 10.10.10.100:30123`
+
+** Here we are exposing the cluster ip directly but in real scenario we'll use a load balancer in front of the cluster.
+
+<!-- ```
+for (($i = 0); $i -lt 10; $i++){ 
+    curl.exe 10.10.10.100:30123
+    "" 
+}
+``` -->
 
 
 ## Reference
