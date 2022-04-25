@@ -23,6 +23,14 @@ vagrant up
 ### SSH into the vagrant box using 
 `vagrant ssh`
 
+### At first make sure that the worker node and master nodes can communicate
+From master node
+`ping <worker_node_ip>`
+From worker nodes
+`ping <master_node_ip>`
+** You may need to enable ICMP traffic from the security group.
+
+
 ## Do this on both the worker and master nodes
 
 ### Disable swap
@@ -87,8 +95,9 @@ sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://pack
 ```
 sudo apt-get update -y
 sudo apt-get install -y kubelet kubeadm kubectl
-sudo apt-mark hold kubelet kubeadm kubectl
 ```
+`sudo apt-mark hold kubelet kubeadm kubectl`
+
 
 ## Do these in master node
 <!-- IPADDR="10.10.10.100" -->
@@ -105,8 +114,8 @@ IPADDR=10.10.12.94
 
 
 
-### (optional) In ec2 we may need to add the NODENAME in the hosts file
-`sudo nano /etc/hosts`
+<!-- ### (optional) In ec2 we may need to add the NODENAME in the hosts file
+`sudo nano /etc/hosts` -->
 
 `sudo kubeadm init --apiserver-advertise-address=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=192.168.0.0/16 --node-name $NODENAME --ignore-preflight-errors Swap --v=5`
 <!-- `curl -fsL https://raw.githubusercontent.com/minhaz1217/linux-configurations/master/bash/03.%20installing%20docker/install_docker.sh | bash -` -->
@@ -131,7 +140,7 @@ systemctl stop kubelet
 ```
 `sudo kubeadm reset`
 
-## Do these to setup the worker node
+# Do these to setup the worker node
 `NODENAME=$(hostname -s)`
 
 ### Copy the contents of `/etc/kubernetes/admin.conf` from the master machine to the worker machine
