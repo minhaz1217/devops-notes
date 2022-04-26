@@ -31,6 +31,7 @@ Node port open a port directly to the node the pod is running in.
 
 ### Get your cluster ip using
 `kubectl get node -o wide`
+![pods are up](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/32%2C%20kubernates%20nodeport%20service/images/01.%20pods%20are%20up%20in%20each%20nodes.png)
 
 ### We can access our app using 
 `curl <cluster_internal_ip>:30123`
