@@ -64,6 +64,12 @@ Note the `External-IP`.
 ### Now send request to the external-ip and see that the request is being loadbalanced
 `curl localhost:3001`
 
+#### To loop use this in powershell
+for (($i = 0); $i -lt 10; $i++){ 
+    curl.exe localhost:3001
+    "" 
+}
+
 ![load balancer correctly redirecting](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/24.%20kubernates%20loadbalancing%20with%20nginx/images/09_load%20balancing%20working.png)
 
 
