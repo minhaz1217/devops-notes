@@ -11,6 +11,7 @@ Node port open a port directly to the node the pod is running in.
 ### See that the nodeport is up
 `kubectl get svc`
 
+![service are up](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/32%2C%20kubernates%20nodeport%20service/images/01.%20services%20are%20up.png)
 ### See more information about the service using
 `kubectl describe nodeport-svc`
 
@@ -28,12 +29,12 @@ Node port open a port directly to the node the pod is running in.
 
 ### Now see that there are some pods
 `kubectl get pods`
+![pods on each node is up](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/32%2C%20kubernates%20nodeport%20service/images/02.%20pods%20are%20up%20in%20each%20nodes.png)
 
 ### Get your cluster ip using
 `kubectl get node -o wide`
-![pods are up](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/32%2C%20kubernates%20nodeport%20service/images/01.%20pods%20are%20up%20in%20each%20nodes.png)
 
 ### We can access our app using 
 `curl <cluster_internal_ip>:30123`
 
-![node port working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/35.%20setup%20a%20kubernetes%20cluster/images/cluster%20lb%20working%20using%20nodeport.png)
+![node port working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/32%2C%20kubernates%20nodeport%20service/images/03%20nodeport%20service%20working.png)
