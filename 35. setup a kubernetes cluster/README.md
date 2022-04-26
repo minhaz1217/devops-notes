@@ -169,7 +169,10 @@ systemctl stop kubelet
 ### Now we should be able to see our worker node from the master node using
 `kubectl get nodes`
 
+![Nodes connected properly but status is not ready](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/35.%20setup%20a%20kubernetes%20cluster/images/worker%20node%20is%20showing%20from%20master%20node.png)
+
 The node status should be not ready.
+
 ### We can inspect that the nodes are having problem using
 `kubectl describe nodes`
 
@@ -230,6 +233,8 @@ spec:
 ### Make sure the pods are running using
 `kubectl get pods`
 
+![all pods are running](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/35.%20setup%20a%20kubernetes%20cluster/images/kubernates%20cluster%20is%20up.png)
+
 ### We can see that the pods are running in our worker nodes using
 `kubectl describe pods`
 
@@ -255,6 +260,10 @@ spec:
 
 ### Curl to the external port using
 `curl 10.10.10.100:30123`
+
+![nodeport working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/35.%20setup%20a%20kubernetes%20cluster/images/exposing%20service%20with%20nodeport%20working.png)
+
+![exposing via nodeport working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/35.%20setup%20a%20kubernetes%20cluster/images/cluster%20lb%20working%20using%20nodeport.png)
 
 ** Here we are exposing the cluster ip directly but in real scenario we'll use a load balancer in front of the cluster.
 
