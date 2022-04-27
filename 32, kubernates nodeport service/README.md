@@ -35,6 +35,6 @@ Node port open a port directly to the node the pod is running in.
 `kubectl get node -o wide`
 
 ### We can access our app using 
-`curl <cluster_internal_ip>:30123`
+`curl <cluster_public_ip>:30123`
 
 ![node port working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/32%2C%20kubernates%20nodeport%20service/images/03%20nodeport%20service%20working.png)
