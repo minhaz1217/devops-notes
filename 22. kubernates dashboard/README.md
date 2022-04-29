@@ -11,8 +11,11 @@ Deploy kubernates dashboard and connect to it.
 ## Then try to create a role binding with the admin using this
 `kubectl apply -f cluster-role-binding.yaml`
 
-## Start the server by using
+## Expose the server by using
 `kubectl proxy`
+
+## We can expose the dashboard using nodeport by 
+`kubectl --namespace kubernetes-dashboard patch svc kubernetes-dashboard -p '{"spec": {"type": "NodePort"}}'`
 
 ## To access the server go here.
 [http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy)
