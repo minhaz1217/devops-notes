@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  leader-election:
+    image: minhaz1217/ds-leader-election
+    networks:
+      - zookeeper-distributed-system
+
+  loadbalancer:
+    build: loadbalancer
+    networks:
+      - zookeeper-distributed-system
+    ports:
+      - 5001:80
+
+  zookeeper:
+    image: "bitnami/zookeeper:latest"
+    networks:
+      - zookeeper-distributed-system
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      
+networks:
+  zookeeper-distributed-system:
+    name: zookeeper-distributed-system
+
+# Use this to run
+# docker-compose up -d --scale leader-election=3
