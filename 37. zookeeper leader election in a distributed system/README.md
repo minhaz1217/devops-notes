@@ -3,6 +3,11 @@ Here we try to solve a problem in distributed system. The problem is leader sele
 
 But we can do this easily and reliably using zookeeper. Here we use 3 replicas of our [solution](https://github.com/minhaz1217/Leader-Election-In-A-Distributed-System-Using-ZooKeeper), a nginx load balancer and zookeeper to simulate the solution
 
+# Architecture
+Here we implement this architecture
+
+![architecture](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/37.%20zookeeper%20leader%20election%20in%20a%20distributed%20system/images/00.%20testing%20leader%20election%20application.png)
+
 # Steps
 
 ## At first we build and run the docker compose file using
