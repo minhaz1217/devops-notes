@@ -3,10 +3,15 @@ Here we manually deploy a kubernetes cluster ourselves. And deploy our app in th
 
 # Pre Requisites
 ### In windows machine we may need to set the hypervisorlaunchtype to off
+### Lunch powershell in administrator mode
 `bcdedit /set hypervisorlaunchtype off`
 
 Then restart, **You might need to restart 2 times.
 **Caution**: After doing this docker and WSL will stop working.
+
+
+### To go back to previous state you can use this
+`bcdedit /set hypervisorlaunchtype auto`
 
 # Manual setup
 ## Setup vagrant (optional)
