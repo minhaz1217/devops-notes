@@ -1,0 +1,13 @@
+apiVersion: extension/v1beta1
+kind: Ingress
+metadata:
+  name: simple-ingress
+spec:
+  rules:
+  - host: simple-dotnet.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: simple-dotnet
+          servicePort: 80

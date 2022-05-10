@@ -32,7 +32,7 @@ kubectl expose deployment ingress-controller-demo
 
 ### Expose that server through ingress
 ```
-kubectl create ingress demo-localhost --class=nginx \
+kubectl create ingress ingress-controller-demo-ing --class=nginx \
   --rule=demo.localdev.me/*=ingress-controller-demo:80
 ```
 
@@ -43,6 +43,13 @@ kubectl create ingress demo-localhost --class=nginx \
 `curl demo.localdev.me:8080`
 
 If everything is ok you'll see output as `<html><body><h1>It works!</h1></body></html>`
+<!-- TODO: add image 01 -->
 
+### Delete everything that was used for testing
+```
+kubectl delete ingress ingress-controller-demo-ing
+kubectl delete deployment ingress-controller-demo --cascade
+kubectl delete svc ingress-controller-demo
+```
 # Reference
 [https://kubernetes.github.io/ingress-nginx/deploy/](https://kubernetes.github.io/ingress-nginx/deploy/)
