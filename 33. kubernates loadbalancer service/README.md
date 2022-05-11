@@ -23,3 +23,10 @@ Try the service type loadbalancer.
 
 ### Send request to the server through service using
 `curl localhost:3001`
+
+# Deleting
+### To remove everything we've done here, use these
+```
+kubectl delete -f loadbalancer-svc.yaml
+kubectl delete -f server-rc.yaml
+```
