@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-payment-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dotnet-payment-service
+  template:
+    metadata:
+      labels:
+        app: dotnet-payment-service
+    spec:
+      containers:
+      - name: dotnet-payment-service
+        image: minhaz1217/simple-dotnet

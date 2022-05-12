@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: load-balancer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: l7-load-balancer
+  template:
+    metadata:
+      labels:
+        app: l7-load-balancer
+    spec:
+      containers:
+      - name: l7-load-balancer
+        image:  minhaz1217/38-l7-lb:0.0.3

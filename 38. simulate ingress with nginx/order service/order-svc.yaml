@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  ports:
+  - port: 3001
+    targetPort: 80
+  selector:
+    app: dotnet-order-service
