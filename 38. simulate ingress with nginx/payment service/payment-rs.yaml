@@ -3,7 +3,7 @@ kind: ReplicaSet
 metadata:
   name: rs-payment-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: dotnet-payment-service
