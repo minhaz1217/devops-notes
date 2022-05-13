@@ -15,7 +15,7 @@ This is what we will be implementing.
 10.10.10.100 api.payment.foodpanda.com
 10.10.10.100 api.order.foodpanda.com
 ```
-
+This is the ip of the server that has the layer 4 LB.
 ## Outside the cluster server
 ### Here we setup our layer 4 proxy outside our cluster
 ### (Optional) Bring up a separate machine using vagrant
@@ -28,11 +28,14 @@ This is what we will be implementing.
 `sudo apt install nginx -y`
 
 ### Copy the contents of the `layer-4 load balancer/nginx.conf` config to this file
+**Remember to change the ip to the ip of the master node.**
 `nano /etc/nginx/nginx.conf`
 
 ### Check that the configuration is ok using
 `sudo nginx -t`
 
+<!-- unknown directive "stream" in /etc/nginx/nginx.conf -->
+<!-- load_module /usr/lib/nginx/modules/ngx_stream_module.so; at the start of the nginx.conf -->
 ### Now restart the nginx using
 `sudo systemctl restart nginx`
 
@@ -60,7 +63,7 @@ This is what we will be implementing.
 ### Make sure the that service is up using
 `kubectl get svc`
 
-
+Go back one directory by using `cd ..`
 ### Brining up the payment service and pod from `payment service` folder
 `cd "payment service"`
 ### To first we create replica set
@@ -84,7 +87,7 @@ This is what we will be implementing.
 ![all services and pods up](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/38.%20simulate%20ingress%20with%20nginx/images/03.%20all%20pods%20rs%20and%20services%20are%20up.png)
 
 ### Here we will configure layer 7 proxy along with the services and pods.
-
+Go back one directory by using `cd ..`
 ### At first start the layer 7 proxy pods (these are built using the dockerfile from `layer-7 load balancer`) 
 `cd "load balancer service"`
 
