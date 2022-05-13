@@ -3,7 +3,7 @@ Here we forward traffic from outside our cluster into our cluster using Layer 4 
 
 # Architecture
 This is what we will be implementing.
-<!-- TODO: add image -->
+![Architecture](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/38.%20simulate%20ingress%20with%20nginx/images/01.%20simulating%20ingress%20with%20nginx.png)
 
 # Setup
 ## In the main PC, if in a test environment
@@ -52,7 +52,7 @@ This is what we will be implementing.
 ### The replica set has scale of 1, so that the pod can start quickly, when it starts we scale it to 3
 `kubectl scale rs rs-order-service --replicas=3`
 
-<!-- TODO: insert image -->
+![Order service related things up](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/38.%20simulate%20ingress%20with%20nginx/images/02.%20order%20pods%20up.png)
 
 ### Start the order service using
 `kubectl create -f order-svc.yaml`
@@ -81,7 +81,7 @@ This is what we will be implementing.
 ### Make sure the that service is up using
 `kubectl get svc`
 
-<!-- TODO: insert image 03 -->
+![all services and pods up](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/38.%20simulate%20ingress%20with%20nginx/images/03.%20all%20pods%20rs%20and%20services%20are%20up.png)
 
 ### Here we will configure layer 7 proxy along with the services and pods.
 
@@ -97,7 +97,7 @@ This is what we will be implementing.
 ### Make sure the the rs, pods and services are up using
 `kubectl get rs,pods,svc`
 
-<!-- TODO: image -->
+![Everything up](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/38.%20simulate%20ingress%20with%20nginx/images/04.%20every%20thing%20is%20up.png)
 
 ### Now from outside the server curl to the services using (where we've changed the hosts file.)
 `curl api.order.foodpanda.com`
@@ -114,7 +114,7 @@ for (($i = 0); $i -lt 10; $i++){
     "" 
 } -->
 
-<!-- TODO: add image -->
+![Layer 4 and layer 7 load balancer working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/38.%20simulate%20ingress%20with%20nginx/images/05.%20working%20correctly.png)
 
 
 ## Delete everything
