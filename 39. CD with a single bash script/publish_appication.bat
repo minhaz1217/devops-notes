@@ -6,6 +6,14 @@ set git_directory=D:\MyComputer\website\c#\simple dotnet app
 @REM relative diretory of project to build
 set project_to_build_relative_path=\simple dotnet app
 
+set private_key_wsl_location=/mnt/c/Users/HA HA/amazon_key
+set published_folder_wsl="/mnt/d/MyComputer/website/c#/simple dotnet app/simple dotnet app/publish/output/"
+
+set remote_host=65.0.181.197
+set remote_user=ubuntu
+set remote_location="~/project"
+
+
 set project_to_build=%git_directory%%project_to_build_relative_path%
 set output_directory=%git_directory%%project_to_build_relative_path%\publish\output
 
@@ -26,11 +34,14 @@ dotnet publish -c Release --no-self-contained -r linux-x64 -o "%output_directory
 @REM @REM xcopy /E /Y %inputDir%\Views %outputDir%\Views
 
 @REM Upload the project
-wsl.exe -d Ubuntu -u root sudo rsync -avzh -e "ssh -i \"/mnt/c/Users/HA HA/amazon_key\"" "/mnt/d/MyComputer/website/c#/simple dotnet app/simple dotnet app/publish/output/" ubuntu@65.0.181.197:"~/project"
+wsl.exe -d Ubuntu -u root sudo rsync -avzh -e "ssh -i \"%private_key_wsl_location%\"" %published_folder_wsl% %remote_user%@%remote_host%:%remote_location%
 
 @REM Working directly from the wsl
 @REM rsync -avzh -e "ssh -i \"/mnt/c/Users/HA HA/amazon_key\"" "/mnt/d/MyComputer/website/c#/simple dotnet app/simple dotnet app/publish/output/" ubuntu@65.0.181.197:"~/project"
 
 @REM ssh -i "/mnt/c/Users/HA HA/amazon_key" ubuntu@65.0.181.197:~/project
 @REM chmod 400 amazon_key -f
-@REM Start or restart the app
+@REM Stop the app 
+wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "ls ~"
+
+@REM Start the app
