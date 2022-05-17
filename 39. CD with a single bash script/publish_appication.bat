@@ -13,6 +13,9 @@ set remote_host=65.0.181.197
 set remote_user=ubuntu
 set remote_location="~/project"
 
+set app_dll_file=simple dotnet app.dll
+set app_port=5000
+
 
 set project_to_build=%git_directory%%project_to_build_relative_path%
 set output_directory=%git_directory%%project_to_build_relative_path%\publish\output
@@ -42,10 +45,10 @@ wsl.exe -d Ubuntu -u root sudo rsync -avzh -e "ssh -i \"%private_key_wsl_locatio
 @REM ssh -i "/mnt/c/Users/HA HA/amazon_key" ubuntu@65.0.181.197:~/project
 @REM chmod 400 amazon_key -f
 @REM Stop the app 
-wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "sudo lsof -ti:5000 | xargs kill -9"
+wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "sudo lsof -ti:%app_port% | xargs kill -9"
 
 
 @REM Start the app
-wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd ~/project; /snap/dotnet-sdk/current/dotnet \"simple dotnet app.dll\""
+wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd ~/project; /snap/dotnet-sdk/current/dotnet \"%app_dll_file%\""
 
 @REM Now get out of the console via CTRL + C, and the server will be running.
