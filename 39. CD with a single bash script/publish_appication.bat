@@ -1,6 +1,7 @@
 @echo off 
 @REM The absolute path the git directory is in
 set git_directory=D:\MyComputer\website\c#\simple dotnet app
+set git_branch=staging
 
 @REM The relative directory from the git diretory to the project diretory
 @REM relative diretory of project to build
@@ -24,8 +25,11 @@ echo %project_to_build_path%
 @REM echo %git_directory% %project_to_build_path%
 echo %output_directory%
 
+@REM At first stash all current changes, if needed.
+@REM git -C "%git_directory%" stash
 
 @REM @REM Change git branch
+git -C "%git_directory%" checkout %git_branch%
 
 @REM @REM Build the project
 dotnet publish -c Release --no-self-contained -r linux-x64 -o "%output_directory%" "%project_to_build%"
