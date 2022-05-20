@@ -37,4 +37,10 @@ Node port open a port directly to the node the pod is running in.
 ### We can access our app using 
 `curl <cluster_public_ip>:30123`
 
+## Delete everything we've created in this doc
+```
+kubectl delete ds dotnet-ds
+kubectl delete svc nodeport-svc
+```
+
 ![node port working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/32%2C%20kubernates%20nodeport%20service/images/03%20nodeport%20service%20working.png)
