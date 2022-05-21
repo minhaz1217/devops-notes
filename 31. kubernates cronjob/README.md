@@ -25,3 +25,9 @@ This will run a pod every 15 min.
 `kubectl create -f time_limited_cronjob.yaml`
 
 If the job didn't run by the limit set in `startingDeadlineSeconds` field, it will be shown as failed.
+
+## Delete
+### To delete everything we've done so far
+```
+kubectl delete cj basic-cronjob --cascade
+```
