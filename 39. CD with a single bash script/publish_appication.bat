@@ -51,10 +51,15 @@ wsl.exe -d Ubuntu -u root sudo rsync -avzh -e "ssh -i \"%private_key_wsl_locatio
 @REM ssh -i "/mnt/c/Users/HA HA/amazon_key" ubuntu@65.0.181.197:~/project
 @REM chmod 400 amazon_key -f
 @REM Stop the app 
-wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "sudo lsof -ti:%app_port% | xargs kill -9"
+wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "sudo lsof -ti:%app_port% | sudo xargs kill -9"
 
 
 @REM Start the app
 wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd ~/project; /snap/dotnet-sdk/current/dotnet \"%app_dll_file%\""
+
+@REM If added via apt install
+@REM wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd ~/project; /bin/dotnet \"%app_dll_file%\""
+
+
 
 @REM Now get out of the console via CTRL + C, and the server will be running.
