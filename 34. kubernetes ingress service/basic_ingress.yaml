@@ -1,4 +1,4 @@
-apiVersion: extension/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: simple-ingress
@@ -9,5 +9,13 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: simple-dotnet
+          serviceName: simple-dotnet-service
+          servicePort: 80
+
+  - host: order.foodpanda.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: order-service
           servicePort: 80

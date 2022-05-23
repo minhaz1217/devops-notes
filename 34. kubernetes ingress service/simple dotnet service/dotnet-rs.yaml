@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-simple-dotnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rs-simple-dotnet
+  template:
+    metadata:
+      labels:
+        app: rs-simple-dotnet
+    spec:
+      containers:
+      - name: rs-simple-dotnet
+        image: minhaz1217/simple-dotnet

@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet-order-service
+  template:
+    metadata:
+      labels:
+        app: dotnet-order-service
+    spec:
+      containers:
+      - name: dotnet-order-service
+        image: minhaz1217/simple-dotnet
