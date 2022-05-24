@@ -31,7 +31,7 @@ echo %output_directory%
 @REM @REM Change git branch
 git -C "%git_directory%" checkout %git_branch%
 
-git -C "%git_directory%" pull %git_branch%
+git -C "%git_directory%" pull origin %git_branch%
 
 @REM @REM Build the project
 dotnet publish -c Release --no-self-contained -r linux-x64 -o "%output_directory%" "%project_to_build%"
