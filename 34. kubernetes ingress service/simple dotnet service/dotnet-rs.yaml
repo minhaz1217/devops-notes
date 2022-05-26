@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: rs-simple-dotnet
-        image: minhaz1217/simple-dotnet
+        image: minhaz1217/simple-dotnet:v2

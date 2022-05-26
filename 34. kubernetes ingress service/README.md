@@ -32,8 +32,7 @@ kubectl expose deployment ingress-controller-demo
 
 ### Expose that server through ingress
 ```
-kubectl create ingress ingress-controller-demo-ing --class=nginx \
-  --rule=demo.localdev.me/*=ingress-controller-demo:80
+kubectl create ingress ingress-controller-demo-ing --class=nginx --rule=demo.localdev.me/*=ingress-controller-demo:80
 ```
 
 ### Now portforward the server to ingress
@@ -49,6 +48,7 @@ If everything is ok you'll see output as `<html><body><h1>It works!</h1></body><
 ```
 kubectl delete ingress ingress-controller-demo-ing
 kubectl delete deployment ingress-controller-demo --cascade
+kubectl delete pods ingress-controller-demo
 kubectl delete svc ingress-controller-demo
 ```
 # Reference
