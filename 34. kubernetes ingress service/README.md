@@ -51,5 +51,47 @@ kubectl delete deployment ingress-controller-demo --cascade
 kubectl delete pods ingress-controller-demo
 kubectl delete svc ingress-controller-demo
 ```
+
+## Deploying our own service and route with ingress
+### Cd into the simple dotnet service
+`cd "simple dotnet service"`
+
+### create the Service and the replication controller
+```
+kubectl create -f dotnet-rs.yaml
+kubectl create -f dotnet-svc.yaml
+```
+
+### Cd into the order service and create the replication controller and the service
+```
+cd "order service"
+kubectl create -f order-rs.yaml
+kubectl create -f order-svc.yaml
+```
+
+### Now go to the main folder and create the ingress service
+`cd ..`
+
+`kubectl create -f basic_ingress.yaml`
+
+### We can get ingress using
+`kubectl get ing`
+
+`kubectl get ingress`
+
+### We can see information using 
+`kubectl describe ing`
+See that there is an event to sync with nginx controller
+
+### Now port forward the ingress controller to 8080
+`kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8080:80`
+
+
+### Make some request and verify that ingress is handling the traffic
+`curl order.foodpanda.com:8080`
+
+`curl simple-dotnet.example.com:8080`
 # Reference
 [https://kubernetes.github.io/ingress-nginx/deploy/](https://kubernetes.github.io/ingress-nginx/deploy/)
+
+[https://kubernetes.io/docs/concepts/services-networking/ingress/](https://kubernetes.io/docs/concepts/services-networking/ingress/)
