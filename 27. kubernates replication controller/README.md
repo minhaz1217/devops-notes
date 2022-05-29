@@ -48,3 +48,8 @@ Here I document basic usage of kubernates replication controller.
 
 ### To keep the pod but deleting the RC use this
 `kubectl delete rc nginx-rc --cascade=false`
+
+### Delete everything we've done so far
+```
+kubectl delete rc nginx-rs --cascade=foreground
+```
