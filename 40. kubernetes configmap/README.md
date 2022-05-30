@@ -1,0 +1,1 @@
+`kubectl create configmap my-config --from-file=prod.env`
