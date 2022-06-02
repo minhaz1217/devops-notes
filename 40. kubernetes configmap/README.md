@@ -23,4 +23,6 @@ Exploring configmap on kubernetes
 #### Get config from config map created from file
 `kubectl get configmap my-config -o yaml`
 
+
+#### Create configmap from file
 `kubectl create configmap my-config --from-file=prod.env`
