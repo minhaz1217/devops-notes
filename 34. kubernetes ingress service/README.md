@@ -42,7 +42,7 @@ kubectl create ingress ingress-controller-demo-ing --class=nginx --rule=demo.loc
 `curl demo.localdev.me:8080`
 
 If everything is ok you'll see output as `<html><body><h1>It works!</h1></body></html>`
-<!-- TODO: add image 01 -->
+![curl output](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/34.%20kubernetes%20ingress%20service/images/01.%20ingress%20controller%20setup%20is%20working.png)
 
 ### Delete everything that was used for testing
 ```
