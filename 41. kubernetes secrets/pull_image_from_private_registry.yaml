@@ -1,0 +1,10 @@
+piVersion: v1
+kind: Pod
+metadata:
+  name: private-pod
+spec:
+  imagePullSecrets:
+    - name: mydockerhubsecret
+  containers:
+    - image: username/private:tag
+      name: main
