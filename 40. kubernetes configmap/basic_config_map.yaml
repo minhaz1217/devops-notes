@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  sleep-interval : "25"
+  random-data : "Hello World"
+metadata:
+  creationTimestamp: 2022-06-06T20:31:08Z
+  name: basic-configmap
+  namespace: default
+  resourceVersion: "910025"
+  selfLink: /api/v1/namespaces/default/configmaps/basic
+  uid: 88c4167e-6002-11e6-a50d-42010af00237

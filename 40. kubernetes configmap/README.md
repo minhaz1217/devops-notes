@@ -26,3 +26,13 @@ Exploring configmap on kubernetes
 
 #### Create configmap from file
 `kubectl create configmap my-config --from-file=prod.env`
+
+#### Edit a configmap using
+`kubectl edit configmap my-config`
+
+
+#### Creating configmap from yaml file
+`kubectl create -f basic_config_map.yaml`
+
+#### Delete configmap
+`kubectl delete cm basic-configmap`
