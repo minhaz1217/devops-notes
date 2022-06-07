@@ -14,6 +14,9 @@ To explore kubernetes secrets
 <!-- ### Create secret from file
 `kubectl create -f basic_secret.yaml` -->
 
+#### Deleting secrets
+`kubectl delete secrets fortune-https`
+
 ## Pulling image from private docker registry 
 
 #### Setup docker registry email and passwords
@@ -23,3 +26,4 @@ Here keep in mind that we are create a docker-registry type secret
 
 #### Use the secret in a pod's definition
 `kubectl create -f pull_image_from_private_registry.yaml`
+
