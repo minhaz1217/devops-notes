@@ -36,3 +36,15 @@ Exploring configmap on kubernetes
 
 #### Delete configmap
 `kubectl delete cm basic-configmap`
+
+## Configmap as environment variable
+
+#### At first create the CM using
+`kubectl create configmap basic-configmap --from-file=prod.env`
+
+
+#### Go into the pod using
+`kubectl exec -it environment-from-configmap -- bash`
+
+#### Enter this and verify that it is working
+`env | grep -i sleep`

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: environment-from-configmap
+spec:
+  containers:
+    - image: nginx
+      name: cm-as-env
+      env:
+      - name : INTERVAL
+        valueFrom:
+          configMapKeyRef:
+            name: basic-configmap
+            key: prod.env
