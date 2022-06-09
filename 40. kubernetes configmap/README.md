@@ -48,3 +48,7 @@ Exploring configmap on kubernetes
 
 #### Enter this and verify that it is working
 `env | grep -i sleep`
+
+
+#### Delete configmap
+`kubectl delete cm basic-configmap`
