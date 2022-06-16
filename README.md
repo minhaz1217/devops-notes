@@ -14,5 +14,3 @@
 # How to use
 ### At first clone the repo using
 `git clone https://github.com/minhaz1217/devops-notes.git`
-
-### Then go into each folder and read what that folder does.
