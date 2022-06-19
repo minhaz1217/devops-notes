@@ -28,3 +28,9 @@
 ## 2. Kubernetes cluster using bare metal linux.
 
 ### [Here](https://github.com/minhaz1217/devops-notes/tree/master/35.%20setup%20a%20kubernetes%20cluster) I setup a full Kubernetes master-worker cluster using bare metal linux.
+
+## 3. Leader election using **Zookeeper**
+
+### [Here](https://github.com/minhaz1217/devops-notes/tree/master/37.%20zookeeper%20leader%20election%20in%20a%20distributed%20system) I simulate a solution for leader election problem using a distributed queue.
+
+![architecture](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/37.%20zookeeper%20leader%20election%20in%20a%20distributed%20system/images/00.%20testing%20leader%20election%20application.png)
