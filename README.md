@@ -34,3 +34,8 @@
 ### [Here](https://github.com/minhaz1217/devops-notes/tree/master/37.%20zookeeper%20leader%20election%20in%20a%20distributed%20system) I simulate a solution for leader election problem using a distributed queue.
 
 ![architecture](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/37.%20zookeeper%20leader%20election%20in%20a%20distributed%20system/images/00.%20testing%20leader%20election%20application.png)
+
+
+## 4. Continuous deployment using a single bash script
+
+### [Here](https://github.com/minhaz1217/devops-notes/tree/master/39.%20CD%20with%20a%20single%20bash%20script) I wrote a script that will `change git branch` > `build an application` > `connect to a remote host` > `upload the built application` > `restart the application` with only one execution. I regularly use this script to automate the deployment procedure of the different projects I'm in charge of at my organization.
