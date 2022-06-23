@@ -5,21 +5,12 @@
 
 <br>
 
-#### This repo is for document purpose only, many of my ready to use scripts will be in this repo
+#### This repo is for document purpose only, many of my ready to use scripts will be in [this](https://github.com/minhaz1217/linux-configurations) repo
 
-## [Linux Configuration](https://github.com/minhaz1217/linux-configurations)
 
-<br>
+# Here are some projects that I'm proud of in this repo.
 
-# How to use
-### At first clone the repo using
-`git clone https://github.com/minhaz1217/devops-notes.git`
-
-### Then go into each folder and read what that folder does.
-
-# Here are some folders I'm proud of.
-
-## 1. kubernates loadbalancing with nginx
+## 1. Kubernates loadbalancing with nginx
 
 ### [Here](https://github.com/minhaz1217/devops-notes/tree/master/24.%20kubernates%20loadbalancing%20with%20nginx) I built a full simulation of loadbalancing to between different services using **kubernetes**
 
@@ -39,3 +30,12 @@
 ## 4. Continuous deployment using a single bash script
 
 ### [Here](https://github.com/minhaz1217/devops-notes/tree/master/39.%20CD%20with%20a%20single%20bash%20script) I wrote a script that will `change git branch` > `build an application` > `connect to a remote host` > `upload the built application` > `restart the application` with only one execution. I regularly use this script to automate the deployment procedure of the different projects I'm in charge of at my organization.
+
+
+<br>
+
+# How to use
+### At first clone the repo using
+`git clone https://github.com/minhaz1217/devops-notes.git`
+
+### Then go into each folder and read what that folder does.
