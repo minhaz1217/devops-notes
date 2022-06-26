@@ -38,37 +38,17 @@ set app_port=5000
 set project_to_build=%git_directory%%project_to_build_relative_path%
 set project_output_path=%git_directory%%project_to_build_relative_path%%output_relative_path_wsl%
 
-echo %project_to_build_path%
-@REM echo %git_directory% %project_to_build_path%
-echo %project_output_path%
-
-@REM At first stash all current changes, if needed.
-@REM git -C "%git_directory%" stash
-
 @REM @REM Change git branch
 git -C "%git_directory%" checkout %git_branch%
 git -C "%git_directory%" pull origin %git_branch%
 
-@REM @REM Build the project
+@REM Building the project
 echo "Building the project: %project_to_build%"
 echo "Outputting the project to: %project_output_path%"
 dotnet publish -c Release --no-self-contained -r linux-x64 -o "%project_output_path%" "%project_to_build%"
 
-@REM dotnet publish -c Release -f netcoreapp3.1 --no-self-contained -r linux-x64 -o %project_output_path% %project_to_build%
-
-
-@REM @REM Copy additional files
-@REM @REM xcopy /E /Y %inputDir%\Views %outputDir%\Views
-
 @REM Upload the project
 wsl.exe -d Ubuntu -u root sudo rsync -avzh -e "ssh -i \"%private_key_wsl_location%\"" %published_folder_wsl% %remote_user%@%remote_host%:%remote_location%
-
-@REM Working directly from the wsl
-@REM rsync -avzh -e "ssh -i \"/mnt/c/Users/HA HA/amazon_key\"" "/mnt/d/MyComputer/website/c#/simple dotnet app/simple dotnet app/publish/output/" ubuntu@65.0.181.197:"~/project"
-
-@REM ssh -i "/mnt/c/Users/HA HA/amazon_key" ubuntu@65.0.181.197:~/project
-@REM chmod 400 amazon_key -f
-
 
 @REM Stopping the app 
 wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "sudo lsof -ti:%app_port% | sudo xargs kill -9"
@@ -77,6 +57,26 @@ wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%
 @REM Starting the app
 wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd %remote_location%; /snap/dotnet-sdk/current/dotnet \"%app_dll_file%\""
 
+@REM Now get out of the console via CTRL + C, and the server will be running.
+
+
+
+@REM Backup of different command i may need later and to customize some commands.
+
+@REM dotnet publish -c Release -f netcoreapp3.1 --no-self-contained -r linux-x64 -o %project_output_path% %project_to_build%
+
+@REM At first stash all current changes, if needed.
+@REM git -C "%git_directory%" stash
+
+@REM Working directly from the wsl
+@REM rsync -avzh -e "ssh -i \"/mnt/c/Users/HA HA/amazon_key\"" "/mnt/d/MyComputer/website/c#/simple dotnet app/simple dotnet app/publish/output/" ubuntu@65.0.181.197:"~/project"
+
+@REM @REM Copy additional files
+@REM @REM xcopy /E /Y %inputDir%\Views %outputDir%\Views
+
+@REM ssh -i "/mnt/c/Users/HA HA/amazon_key" ubuntu@65.0.181.197:~/project
+@REM chmod 400 amazon_key -f
+
 @REM If added via apt install
 @REM wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd ~/project; /bin/dotnet \"%app_dll_file%\""
 
@@ -84,5 +84,3 @@ wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%
 @REM another way to execute remote command
 @REM wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% 'bash -i -c "cd %remote_location%;npm run start"'
 
-
-@REM Now get out of the console via CTRL + C, and the server will be running.
