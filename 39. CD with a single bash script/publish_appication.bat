@@ -1,16 +1,30 @@
 @echo off 
-@REM The absolute path the git directory is in
-set git_directory=D:\MyComputer\website\c#\simple dotnet app
+@REM The branch we will be building and publishing.
 set git_branch=staging
 
-@REM The relative directory from the git diretory to the project diretory
-@REM relative diretory of project to build
+@REM Setting up the git location + csproj location + output location
+set git_directory_drive=D:
+set git_directory_drive_wsl=/mnt/d
+set project_relative_path_to_drive=\MyComputer\website\c#\simple dotnet app
 set project_to_build_relative_path=\simple dotnet app
+set output_relative_path=/bin/publish
 
-set private_key_wsl_location=/mnt/c/Users/HA HA/amazon_key
-set published_folder_wsl="/mnt/d/MyComputer/website/c#/simple dotnet app/simple dotnet app/publish/output/"
 
-set remote_host=65.0.181.197
+set git_directory=%git_directory_drive%%project_relative_path_to_drive%
+
+
+set project_relative_path_to_drive_wsl=%project_relative_path_to_drive:\=/%
+set project_to_build_relative_path_wsl=%project_to_build_relative_path:\=/%
+set relative_output_directory_wsl=%relative_output_directory:\=/%
+set output_relative_path_wsl=%output_relative_path:\=/%
+set published_folder_wsl="%git_directory_drive_wsl%%project_relative_path_to_drive_wsl%%project_to_build_relative_path_wsl%%output_relative_path_wsl%"
+
+set private_key_drive_wsl=/mnt/c
+set private_key_relative_location_to_drive=\Users\HA HA\amazon_key
+set private_key_relative_location_to_drive_wsl=%private_key_relative_location_to_drive:\=/%
+set private_key_wsl_location=%private_key_drive_wsl%%private_key_relative_location_to_drive_wsl%
+
+set remote_host=15.207.249.72
 set remote_user=ubuntu
 set remote_location="~/project"
 
@@ -19,7 +33,7 @@ set app_port=5000
 
 
 set project_to_build=%git_directory%%project_to_build_relative_path%
-set output_directory=%git_directory%%project_to_build_relative_path%\publish\output
+set output_directory=%git_directory%%project_to_build_relative_path%%output_relative_path_wsl%
 
 echo %project_to_build_path%
 @REM echo %git_directory% %project_to_build_path%
@@ -34,7 +48,8 @@ git -C "%git_directory%" checkout %git_branch%
 git -C "%git_directory%" pull origin %git_branch%
 
 @REM @REM Build the project
-dotnet publish -c Release --no-self-contained -r linux-x64 -o "%output_directory%" "%project_to_build%"
+echo "Building the project: %project_to_build%"
+@REM dotnet publish -c Release --no-self-contained -r linux-x64 -o "%output_directory%" "%project_to_build%"
 
 @REM dotnet publish -c Release -f netcoreapp3.1 --no-self-contained -r linux-x64 -o %output_directory% %project_to_build%
 
@@ -55,11 +70,14 @@ wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%
 
 
 @REM Start the app
-wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd ~/project; /snap/dotnet-sdk/current/dotnet \"%app_dll_file%\""
+wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd %remote_location%; /snap/dotnet-sdk/current/dotnet \"%app_dll_file%\""
 
 @REM If added via apt install
 @REM wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% "cd ~/project; /bin/dotnet \"%app_dll_file%\""
 
+
+@REM another way to execute remote command
+@REM wsl.exe -d Ubuntu -u root sudo ssh -i "%private_key_wsl_location%" %remote_user%@%remote_host% 'bash -i -c "cd %remote_location%;npm run start"'
 
 
 @REM Now get out of the console via CTRL + C, and the server will be running.
