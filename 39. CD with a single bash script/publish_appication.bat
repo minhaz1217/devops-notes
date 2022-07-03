@@ -39,7 +39,9 @@ set project_to_build=%git_directory%%project_to_build_relative_path%
 set project_output_path=%git_directory%%project_to_build_relative_path%%output_relative_path_wsl%
 
 @REM @REM Change git branch
+git -C "%git_directory%" fetch origin %git_branch%
 git -C "%git_directory%" checkout %git_branch%
+git -C "%git_directory%" reset --hard origin/%git_branch%
 git -C "%git_directory%" pull origin %git_branch%
 
 @REM Building the project
