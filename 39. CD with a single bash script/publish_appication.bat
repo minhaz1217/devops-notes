@@ -40,7 +40,7 @@ set project_output_path=%git_directory%%project_to_build_relative_path%%output_r
 
 @REM @REM Change git branch
 git -C "%git_directory%" fetch origin %git_branch%
-git -C "%git_directory%" checkout %git_branch%
+git -C "%git_directory%" checkout %git_branch% -f
 git -C "%git_directory%" reset --hard origin/%git_branch%
 git -C "%git_directory%" pull origin %git_branch%
 
