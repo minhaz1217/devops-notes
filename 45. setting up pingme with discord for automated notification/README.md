@@ -2,7 +2,7 @@
 To setup [pingme](https://github.com/kha7iq/pingme) with discord so that I can send notification message to a channel after a long command finished running.
 
 # Steps
-### After finishing setting up pingme on the pc that you want to send the automated message from follow these steps.
+### After finishing setting up pingme on the pc that you want to send the automated message from, follow these steps.
 
 ### 1.  At first go to [https://discord.com/developers/applications](https://discord.com/developers/applications) and login. 
 
