@@ -32,6 +32,14 @@ Copy the acme-challenge string and enter it as a TXT Record for your domain.
 `select * from "main"."certificate;"`
 `delete from "main"."certificate" where id=1`
 
+
+## Copy the fullchain.pem and privkey.pem file
+```
+sudo cp /etc/letsencrypt/live/minhazul.com/privkey.pem ~/database/nginx_proxymanager/custom_ssl/npm-1/privkey.pem
+
+sudo cp /etc/letsencrypt/live/minhazul.com/fullchain.pem ~/database/nginx_proxymanager/custom_ssl/npm-1/fullchain.pem
+```
+
 ## Now restart nginx proxy manager docker container 
 `sudo docker stop nproxy`
 
