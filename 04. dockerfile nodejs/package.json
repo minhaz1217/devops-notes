@@ -2,7 +2,7 @@
     "name": "simple_nodejs_docker_app",
     "version": "1.0.0",
     "description": "Simple dockerfile for running nodejs app",
-    "author": "Minhazul Hayat Khan <minhaz1217@gmail.com>",
+    "author": "Minhazul Hayat Khan <github.com/minhaz1217>",
     "main": "server.js",
     "scripts": {
       "start": "node server.js"
