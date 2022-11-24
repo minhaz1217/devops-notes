@@ -3,7 +3,7 @@ Nginx proxy manager doesn't allow generating wildcard certificates. Also when I 
 
 # Steps
 ## Generate the wildcard certificate.
-`sudo certbot certonly -d '*.minhazul.com' --manual`
+`sudo certbot certonly -d '*.minhazul.com' -d 'minhazul.com' --manual`
 
 It will generate a certificate. It will give a challenge. We'll have to go to our domain host and enter the challenge string.
 
@@ -14,12 +14,18 @@ Copy the acme-challenge string and enter it as a TXT Record for your domain.
 ## Use this to test that your TXT record change has been propageted.
 `nslookup -type=TXT _acme-challenge.minhazul.com`
 
+## If the certbot gives file then use this
+`sudo docker exec portfolio sh`
+
+`cd /usr/share/nginx/html`
+
+`echo "text" > "file_name"`
 
 ## Combine the certificates and make the db string to put it in the nginx proxy manager sqlite db.
-`echo "INSERT INTO \"main\".\"certificate\"(\"id\", \"created_on\", \"modified_on\", \"owner_user_id\", \"is_deleted\", \"provider\", \"nice_name\", \"domain_names\", \"expires_on\", \"meta\") VALUES (1, '2022-02-06 18:49:22', '2022-02-06 18:49:22', 1, 0, 'other', 'Wild Card Minhazul', '[\"*.minhazul.com\"]', '2022-05-03 15:58:46', '{ \"certificate\": \"$(sudo cat /etc/letsencrypt/live/minhazul.com/cert.pem )\", \"certificate_key\": \"$(sudo cat /etc/letsencrypt/live/minhazul.com/privkey.pem)\"}');" > nginx_meta`
+`echo "INSERT INTO \"main\".\"certificate\"(\"id\", \"created_on\", \"modified_on\", \"owner_user_id\", \"is_deleted\", \"provider\", \"nice_name\", \"domain_names\", \"expires_on\", \"meta\") VALUES (1, '2022-11-19 18:49:22', '2022-11-19 18:49:22', 1, 0, 'other', 'Wild Card Minhazul', '[\"*.minhazul.com\"]', '2022-11-19 15:58:46', '{ \"certificate\": \"$(sudo cat /etc/letsencrypt/live/minhazul.com/cert.pem )\", \"certificate_key\": \"$(sudo cat /etc/letsencrypt/live/minhazul.com/privkey.pem)\"}');" > nginx_meta`
 
 
-## Check that the file has been generated successfully and copy the content
+## Check that the file has been generated successfully and **copy the content**
 `cat nginx_meta`
 
 ## Now go into the nginx proxy manager sqlite.
@@ -29,8 +35,9 @@ Copy the acme-challenge string and enter it as a TXT Record for your domain.
 ## Paste the db string that you copied in here.
 **if you already have an entry here, you can delete the entry using
 
-`select * from "main"."certificate;"`
-`delete from "main"."certificate" where id=1`
+`select * from "main"."certificate";`
+
+`delete from "main"."certificate" where id=1;`
 
 
 ## Copy the fullchain.pem and privkey.pem file
@@ -46,9 +53,9 @@ sudo cp /etc/letsencrypt/live/minhazul.com/fullchain.pem ~/database/nginx_proxym
 `sudo docker start nproxy`
 
 ## Kill a docker container
-`ps aux | grep 4efbcd5b1575 | awk '{print $1 $2}'`
+`ps aux | grep 9a20c2c016bf | awk '{print $1 $2}'`
 
-`ps aux | grep 4efbcd5b1575 | head -1 | awk '{print $2}'| xargs sudo kill -9 $1`
+`ps aux | grep 9a20c2c016bf | head -1 | awk '{print $2}'| xargs sudo kill -9 $1`
 
 
 
