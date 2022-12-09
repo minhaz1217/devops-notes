@@ -101,3 +101,7 @@ Remember to restart docker
 
 ### Make sure that the extension is enabled using.
 `\dx`
+
+
+### To disable telemetry from timescale use this in the psql
+`ALTER [SYSTEM | DATABASE | USER] { *db_name* | *role_specification* } SET timescaledb.telemetry_level=off`
