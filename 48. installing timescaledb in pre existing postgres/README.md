@@ -1,7 +1,7 @@
 # Purpose
 Installing and enabling timescaledb in a pre existing postgres db (docker in this case)
 
-I'm running a debian based system (postgres with docker). So my commands will be debian/apt based.
+I'm running a debian based system (postgres version 14 with docker). So my commands will be debian/apt based.
 
 # Steps
 
@@ -57,7 +57,7 @@ If the config is not present in this location you can find it here.
 `nano /var/lib/postgresql/data/pgdata/postgresql.conf`
 
 
-### After the file opens, find the `shared_preload_libraries `, you can use CTRL + w to search the file inside nano.
+### After the file opens, find the `shared_preload_libraries`, you can use CTRL + w to search in the file inside nano.
 
 ### Add `timescaledb` as preloaded libraries. After edit it should look like this.
 `shared_preload_libraries = 'timescaledb'`
