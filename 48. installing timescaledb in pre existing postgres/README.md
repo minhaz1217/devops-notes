@@ -10,7 +10,7 @@ I'm running a debian based system (postgres version 14 with docker). So my comma
 
 ## Step 1 - Installing the extension
 ### Update the apt
-`apt update`
+`apt update -y`
 
 ### Add common needed things.
 `apt install gnupg postgresql-common apt-transport-https lsb-release wget -y`
