@@ -58,3 +58,7 @@ upstream loadbalancer{
 ![The requests are being load balanced](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/11.%20layer%207%20load%20balancing/images/loadbalancer_balancing_requests.png)
 
 ## In the image we can see that the load balancer is sending request to the 2 servers properly.
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

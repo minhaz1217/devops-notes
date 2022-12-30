@@ -30,3 +30,7 @@ Try the service type loadbalancer.
 kubectl delete -f loadbalancer-svc.yaml
 kubectl delete -f server-rc.yaml
 ```
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

@@ -44,3 +44,7 @@ kubectl delete svc nodeport-svc
 ```
 
 ![node port working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/32%2C%20kubernates%20nodeport%20service/images/03%20nodeport%20service%20working.png)
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

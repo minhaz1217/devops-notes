@@ -27,3 +27,6 @@ Here keep in mind that we are create a docker-registry type secret
 #### Use the secret in a pod's definition
 `kubectl create -f pull_image_from_private_registry.yaml`
 
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

@@ -52,3 +52,7 @@ Exploring configmap on kubernetes
 
 #### Delete configmap
 `kubectl delete cm basic-configmap`
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

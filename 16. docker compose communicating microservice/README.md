@@ -11,3 +11,7 @@
 
 ## To communicate between 2 microservices do
 `curl localhost:3000/get-hit-count`
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

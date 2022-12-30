@@ -136,3 +136,7 @@ Notice that the output is 192.168.1.10
 [https://github.com/coredns/coredns](https://github.com/coredns/coredns)
 
 [https://stackoverflow.com/questions/53075796/coredns-pods-have-crashloopbackoff-or-error-state/53414041#53414041](https://stackoverflow.com/questions/53075796/coredns-pods-have-crashloopbackoff-or-error-state/53414041#53414041)
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

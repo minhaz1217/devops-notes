@@ -66,3 +66,6 @@ Partial FQDN:
 Using service name: 
 
 `kubectl exec simple-dotnet-1 -- curl -s http://backend-service`
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

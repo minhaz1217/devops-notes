@@ -25,3 +25,7 @@ You may have to create a access key which can be done from `IAM > Users > Your U
 
 # Reference
 [https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html)
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

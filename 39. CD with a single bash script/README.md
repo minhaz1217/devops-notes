@@ -26,3 +26,7 @@ sudo apt-get update; \
 
 ### Just run the file using
 `publish_application.bat`
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

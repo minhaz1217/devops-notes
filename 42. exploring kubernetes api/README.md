@@ -37,3 +37,6 @@ Notice that it is throwing Forbidden status, as it is https request.
 
 This will output the same result that we would've gotten had we used  `kubectl get job my-job -o json`
 
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

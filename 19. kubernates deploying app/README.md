@@ -109,3 +109,6 @@ kubectl delete pod nginx
 
 ## Curl to the external ip again
 `curl localhost`
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

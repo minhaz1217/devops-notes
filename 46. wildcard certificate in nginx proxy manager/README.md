@@ -81,3 +81,7 @@ sudo ln -sf /etc/letsencrypt/live/minhazul.com/cert.pem ~/database/nginx_proxyma
 sudo ln -sf /etc/letsencrypt/live/minhazul.com/chain.pem ~/database/nginx_proxymanager/letsencrypt/archive/minhazul.com/chain1.pem
 sudo ln -sf /etc/letsencrypt/live/minhazul.com/fullchain.pem ~/database/nginx_proxymanager/letsencrypt/archive/minhazul.com/fullchain1.pem
 sudo ln -sf /etc/letsencrypt/live/minhazul.com/privkey.pem ~/database/nginx_proxymanager/letsencrypt/archive/minhazul.com/privkey1.pem -->
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

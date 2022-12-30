@@ -95,3 +95,7 @@ See that there is an event to sync with nginx controller
 [https://kubernetes.github.io/ingress-nginx/deploy/](https://kubernetes.github.io/ingress-nginx/deploy/)
 
 [https://kubernetes.io/docs/concepts/services-networking/ingress/](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

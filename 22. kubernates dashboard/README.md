@@ -22,3 +22,7 @@ Deploy kubernates dashboard and connect to it.
 
 ## Use this to generate token
 `kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"`
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

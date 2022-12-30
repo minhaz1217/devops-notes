@@ -38,3 +38,6 @@ for (($i = 0); $i -lt 10; $i++){
 ## After some time (maybe less than half a second) we can see that the new leader has been selected
 ![new leader has been selected](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/37.%20zookeeper%20leader%20election%20in%20a%20distributed%20system/images/04.%20new%20leader%20has%20been%20selected.png)
 
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

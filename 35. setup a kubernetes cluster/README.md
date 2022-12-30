@@ -284,3 +284,7 @@ for (($i = 0); $i -lt 10; $i++){
 [https://devopscube.com/setup-kubernetes-cluster-kubeadm/](https://devopscube.com/setup-kubernetes-cluster-kubeadm/)
 
 [https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises](https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises)
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

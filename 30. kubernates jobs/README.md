@@ -47,3 +47,7 @@ Here the pod will run 5 times. It will run one after another.
 `kubectl delete job <job_name> --cascade=false`
 # Reference
 [https://kubernetes.io/docs/concepts/workloads/controllers/job](https://kubernetes.io/docs/concepts/workloads/controllers/job)
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

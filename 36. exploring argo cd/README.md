@@ -24,3 +24,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo`
 
 Login through the dashboard using the username `admin` and the generated password
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

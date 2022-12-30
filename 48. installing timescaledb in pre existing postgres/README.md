@@ -89,3 +89,7 @@ If the config is not present in this location you can find it here.
 
 ### To disable telemetry from timescale use this in the psql
 `ALTER [SYSTEM | DATABASE | USER] { *db_name* | *role_specification* } SET timescaledb.telemetry_level=off`
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

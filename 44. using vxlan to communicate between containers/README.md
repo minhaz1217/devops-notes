@@ -138,30 +138,10 @@ docker rm sender receiver
 sudo ovs-vsctl del-br ovs-br1
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # References
 * [https://www.nullzero.co.uk/docker-openvswitch-aruba-vxlan-network-build/](https://www.nullzero.co.uk/docker-openvswitch-aruba-vxlan-network-build/)
 * [https://www.tutorialspoint.com/how-to-use-an-ovs-bridge-for-networking-on-docker](https://www.tutorialspoint.com/how-to-use-an-ovs-bridge-for-networking-on-docker)
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

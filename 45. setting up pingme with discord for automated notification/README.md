@@ -72,3 +72,7 @@ pingme discord \
 
 ### 16. You pingme setup for discord should be working.
 ![You pingme setup for discord should be working](https://raw.githubusercontent.com/minhaz1217/devops-notes/master/45.%20setting%20up%20pingme%20with%20discord%20for%20automated%20notification/images/15.%20pingme%20should%20be%20working.png)
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

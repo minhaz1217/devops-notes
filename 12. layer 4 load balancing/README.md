@@ -52,3 +52,7 @@ https://github.com/tekn0ir/nginx-stream
 https://nginx.org/en/docs/stream/ngx_stream_core_module.html
 
 https://facsiaginsa.com/nginx/configure-nginx-as-layer-4-load-balancer
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

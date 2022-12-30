@@ -38,3 +38,7 @@ Watch the output and see that different microservice is getting the call
 
 ## Now use the endpoint to get result out from redis
 `curl localhost:3001/get-hit-count`
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

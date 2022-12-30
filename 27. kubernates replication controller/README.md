@@ -53,3 +53,6 @@ Here I document basic usage of kubernates replication controller.
 ```
 kubectl delete rc nginx-rs --cascade=foreground
 ```
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

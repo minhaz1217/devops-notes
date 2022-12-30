@@ -35,3 +35,7 @@ Replication controller can't select pot that has any value, replica set can (lik
 
 ### To keep the pod but deleting the RS use this
 `kubectl delete rs nginx --cascade=orphan`
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)

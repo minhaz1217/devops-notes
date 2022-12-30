@@ -29,3 +29,7 @@ Daemonset is used to run a pod on **selected nodes**.
 
 ### Now verify that the pod is gone using
 `kubectl get pods`
+
+
+#
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)
