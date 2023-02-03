@@ -1,0 +1,38 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "generic/ubuntu2104"
+    config.vm.hostname = "rootless-docker"
+  #  config.disksize.size = '10GB'
+    config.vm.synced_folder "D:/MyComputer/website", "/home/vagrant/website",
+        owner: "vagrant",
+        group: "vagrant",
+      mount_options: ["dmode=775,fmode=664"]
+      
+    config.vm.network "private_network", ip: "10.10.10.150"
+  
+    # config.vm.network "forwarded_port", guest: 8010, host: 8010
+    # config.vm.network "forwarded_port", guest: 5000, host:5000
+    config.vm.network "forwarded_port", guest: 80, host:3001
+    config.vm.network "forwarded_port", guest: 81, host:3002
+    config.vm.network "forwarded_port", guest: 443, host:3003
+    config.vm.network "forwarded_port", guest: 8080, host:3004
+    config.vm.network "forwarded_port", guest: 3000, host:3005
+    # config.vm.network "forwarded_port", guest: 7001, host:7001
+    # config.vm.network "forwarded_port", guest: 7002, host:7002
+    # config.vm.network "forwarded_port", guest: 7003, host:7003
+    # config.vm.network "forwarded_port", guest: 7004, host:7004
+    # config.vm.network "forwarded_port", guest: 7005, host:7005
+  
+    config.vm.provider "virtualbox" do |vb|
+      # Display the VirtualBox GUI when booting the machine
+  #    vb.gui = true
+        vb.memory = 2048
+        vb.cpus = 2
+    end
+    
+    config.vm.provision "shell", inline: <<-SHELL
+    SHELL
+  end
+  
