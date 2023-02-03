@@ -52,11 +52,25 @@ su
 visudo
 ```
 
+or
+
+```
+sudo nano /etc/sudoers
+```
+
 ### Add this to visudo
 `dockeruser ALL=(ALL:ALL) ALL`
 
+exit and save the changes
+
+### Login as dockeruser
+`su dockeruser`
+
 ### cd in the user directory
 `cd ~`
+
+
+### Install docker normally.
 ```
 sudo apt-get update -y
 sudo apt-get install ca-certificates curl gnupg lsb-release -y
@@ -67,8 +81,11 @@ sudo apt-get update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 ```
 
-### Create docker group and add the user
-`sudo groupadd docker`
+### Test that the docker has been installed correctly
+`sudo docker run -it -p 80:80 nginx`
+
+<!-- ### Create docker group and add the user
+`sudo groupadd docker` -->
 
 
 # Steps 
