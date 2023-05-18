@@ -30,6 +30,29 @@ cd ../worker-node-02
 vagrant up
 ```
 
+### Problem and solutions
+if given `Failed to open/create the internal network 'HostInterfaceNetworking-VirtualBox Host-Only Ethernet Adapter' (VERR_INTNET_FLT_IF_NOT_FOUND)`
+
+[Solution Link](https://www.wintips.org/fix-virtualbox-failed-to-open-create-the-internal-network/)
+
+
+1. Solution 1 - Disable and the enable the virtualbox host only ethernet adapter.
+```
+- Go to device manager ( Windows + X >> Device Manager)
+- Under network Adapters find VirtualBox Host-Only Ethernet Adapter
+- Disable it and then enable it. 
+- Try to create vagrant box
+```
+2. Solution 2 - Selected Ethernet adapter as proper network adapter.
+```
+- Open oracle virtual manager
+- Right click on the machine that failed to load.
+- Settings > Network 
+- Adapter 1 > Enable Network Adapter > Bridged Network > Realtek PCIe GbE Family controller.
+```
+Then open the Oracle Virtual Box and select the vm and 
+
+
 ### SSH into the vagrant boxes using 
 `vagrant ssh`
 
@@ -104,19 +127,26 @@ sudo apt-get update -y
 sudo apt-get install -y apt-transport-https ca-certificates curl
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 ```
-`echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list`
+
+```
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+```
 
 ```
 sudo apt-get update -y
 sudo apt-get install -y kubelet kubeadm kubectl
 ```
-`sudo apt-mark hold kubelet kubeadm kubectl`
+```
+sudo apt-mark hold kubelet kubeadm kubectl
+```
 
 
 ## Do these in master node
 <!-- IPADDR="10.10.10.100" -->
-### See the ip address of eth0 using
-`ifconfig`
+### See the ip address of master's internal eth0 using
+```
+sudo ifconfig
+```
 set the ipv4 address as the `IPADDR`
 ### Setup environment variables for node setup
 ```
@@ -124,14 +154,32 @@ IPADDR="<master_node's_eth0's_ip>"
 NODENAME=$(hostname -s)
 ```
 NODENAME=master-node-01
-IPADDR=10.10.12.94
+
+IPADDR=10.10.10.100
 
 
 
 <!-- ### (optional) In ec2 we may need to add the NODENAME in the hosts file
 `sudo nano /etc/hosts` -->
 
-`sudo kubeadm init --apiserver-advertise-address=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=192.168.0.0/16 --node-name $NODENAME --ignore-preflight-errors Swap --v=5`
+```
+sudo kubeadm init --apiserver-advertise-address=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=192.168.0.0/16 --node-name $NODENAME --ignore-preflight-errors Swap --v=5
+```
+
+[Solution URL](https://k21academy.com/docker-kubernetes/container-runtime-is-not-running/)
+
+** if this error occurs ** `[ERROR CRI]: container runtime is not running: output: time="2023-05-18T07:14:46Z" level=fatal msg="validate service connection: CRI v1 runtime API is not implemented for endpoint \"unix:///var/run/containerd/containerd.sock\": rpc error: code = Unimplemented desc = unknown service runtime.v1.RuntimeService"
+, error: exit status 1`
+
+then use this
+```
+** ERROR SOLUTION
+rm /etc/containerd/config.toml
+systemctl restart containerd
+
+Then run the kubeadm init command again
+```
+
 <!-- `curl -fsL https://raw.githubusercontent.com/minhaz1217/linux-configurations/master/bash/03.%20installing%20docker/install_docker.sh | bash -` -->
 
 ### To use kubectl do this as normal user
@@ -139,12 +187,15 @@ IPADDR=10.10.12.94
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+kubectl get nodes
 ```
 or if this error occurs when trying any kubectl command `The connection to the server localhost:8080 was refused - did you specify the right host or port?`
 
 
 ### Create a token for worker nodes to connect
-`sudo kubeadm token create --print-join-command`
+```
+sudo kubeadm token create --print-join-command
+```
 
 ## If anything bad happens during kubeadm init or join we can reset by using
 ```
@@ -152,13 +203,23 @@ rm /etc/kubernetes/kubelet.conf
 rm -rf /etc/kubernetes/pki
 systemctl stop kubelet
 ```
-`sudo kubeadm reset`
+```
+sudo kubeadm reset
+```
 
 # Do these to setup the worker node
-`NODENAME=$(hostname -s)`
+```
+NODENAME=$(hostname -s)
+```
 
 ### Copy the contents of `/etc/kubernetes/admin.conf` from the master machine to the worker machine
-`sudo cat /etc/kubernetes/admin.conf`
+```
+- In the master machine
+sudo cat /etc/kubernetes/admin.conf
+
+- In the worker machine
+sudo nano /etc/kubernetes/admin.conf
+```
 
 ### (optional) check the hash of the admin.conf in both master and worker node to make sure that they are identical
 `sudo sha256sum /etc/kubernetes/admin.conf`
@@ -181,7 +242,7 @@ The node status should be not ready.
 ### We can inspect that the nodes are having problem using
 `kubectl describe nodes`
 
-We'll notice that the error is **container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: cni config uninitialized**
+We'll notice that the error is `container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: cni config uninitialized`
 
 ### We can see the pods of the default kubernetes namespace using
 `kubectl get pods -n kube-system`
