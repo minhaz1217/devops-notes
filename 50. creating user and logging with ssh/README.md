@@ -24,3 +24,37 @@ Enter a custom filename if needed.
 
 ### To configure local port forwarding and custom port, we can use this
 `ssh -L <port_of_the_local_machine>:localhost:<port_of_the_remote_machine> -p <custom_port> -i .\<private_key> user_name@host_ip`
+
+
+## Handle the "Unprotected private key  file" error.
+### To connect to the remote ps with ssh on windows the security of the private key may need to be changed to achieve that, we can use the following powershell script
+```
+# Set Key File Variable:
+  New-Variable -Name Key -Value "private_key"
+
+# Remove Inheritance:
+  Icacls $Key /c /t /Inheritance:d
+
+# Set Ownership to Owner:
+  # Key's within $env:UserProfile:
+    Icacls $Key /c /t /Grant ${env:UserName}:F
+
+   # Key's outside of $env:UserProfile:
+     TakeOwn /F $Key
+     Icacls $Key /c /t /Grant:r ${env:UserName}:F
+
+# Remove All Users, except for Owner:
+  Icacls $Key /c /t /Remove:g Administrator "Authenticated Users" BUILTIN\Administrators BUILTIN Everyone System Users
+
+# Verify:
+  Icacls $Key
+
+# Remove Variable:
+  Remove-Variable -Name Key
+```
+
+### To use this at first save it in the same directory as the private key with name like `change_permission.ps1`
+
+### Change the `private_key` name if your private key is saved with different name.
+
+### Now open a powershell in the same directory and run `change_permission.ps1`
