@@ -1,0 +1,9 @@
+FROM golang:1.15.7-buster
+
+WORKDIR /app
+COPY . .
+ENTRYPOINT ["go", "run", "api/main.go"]
+
+# docker build -t i_go_basic -f Dockerfile_basic .
+# docker run -it --rm -p 3001:3000 --name=go-api i_go_basic
+

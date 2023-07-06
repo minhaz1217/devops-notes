@@ -1,0 +1,15 @@
+# The build stage
+FROM golang:1.16-buster as builder
+WORKDIR /app
+COPY . .
+RUN go build -o go-api /app/api/main.go
+
+# The run stage
+FROM golang:1.16-buster
+WORKDIR /app
+COPY --from=builder /app/go-api .
+EXPOSE 3000
+CMD ["./go-api"]
+
+# docker build -t i_go_basic_build -f Dockerfile_basic_build .
+# docker run -it --rm -p 3002:3000 --name=go-api i_go_basic_build
