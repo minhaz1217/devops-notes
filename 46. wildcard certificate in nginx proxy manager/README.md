@@ -11,16 +11,35 @@ It will generate a certificate. It will give a challenge. We'll have to go to ou
 Copy the acme-challenge string and enter it as a TXT Record for your domain.
 
 
-## Use this to test that your TXT record change has been propageted.
+## Use this to `verify` that your TXT record change has been propagated.
 `nslookup -type=TXT _acme-challenge.minhazul.com`
 
-## If the certbot gives file then use this
-`sudo docker exec portfolio sh`
+## After it is verified, press enter on the console. and it will ask to create a file
+## If the certbot gives file data then use this
+`sudo docker exec -it portfolio bash`
 
+### If it is deployed with basic nginx html server
 `cd /usr/share/nginx/html`
 
 `echo "text" > "file_name"`
 
+### For gatsby
+```
+mkdir public/.well-known
+mkdir public/.well-known/acme-challenge
+cd public/.well-known/acme-challenge
+echo "zW08nx526fjkPl5LIAkVvM7tr0QPdtJlFKWCeOy-0oU.hLF99vqIXHpPlo1wY-998Z94pl12obuVs9cfw0OoQfo" > "zW08nx526fjkPl5LIAkVvM7tr0QPdtJlFKWCeOy-0oU"
+```
+
+### Exit from the container
+`exit`
+
+### Verify that the content is correct using curl
+```
+curl --insecure -L http://minhazul.com/.well-known/acme-challenge/zW08nx526fjkPl5LIAkVvM7tr0QPdtJlFKWCeOy-0oU
+```
+
+### After verified that the file content exists now press enter and 
 ## Combine the certificates and make the db string to put it in the nginx proxy manager sqlite db.
 `echo "INSERT INTO \"main\".\"certificate\"(\"id\", \"created_on\", \"modified_on\", \"owner_user_id\", \"is_deleted\", \"provider\", \"nice_name\", \"domain_names\", \"expires_on\", \"meta\") VALUES (1, '2022-11-19 18:49:22', '2022-11-19 18:49:22', 1, 0, 'other', 'Wild Card Minhazul', '[\"*.minhazul.com\"]', '2022-11-19 15:58:46', '{ \"certificate\": \"$(sudo cat /etc/letsencrypt/live/minhazul.com/cert.pem )\", \"certificate_key\": \"$(sudo cat /etc/letsencrypt/live/minhazul.com/privkey.pem)\"}');" > nginx_meta`
 
@@ -28,12 +47,14 @@ Copy the acme-challenge string and enter it as a TXT Record for your domain.
 ## Check that the file has been generated successfully and **copy the content**
 `cat nginx_meta`
 
-## Now go into the nginx proxy manager sqlite.
-** In my case the db is located in the `~/database/nginx_proxymanager` location
+
+## Now go into the nginx proxy manager sqlite
+** In my case the db is located in the `~/database/nginx_proxymanager` location and mounted in the NPM using volume
 `sudo sqlite3 database/nginx_proxymanager/database.sqlite`
 
 ## Paste the db string that you copied in here.
-**if you already have an entry here, you can delete the entry using
+**if you already have an entry here, you can delete the entry using 
+or if it throws `Error: UNIQUE constraint failed: certificate.id`
 
 `select * from "main"."certificate";`
 
