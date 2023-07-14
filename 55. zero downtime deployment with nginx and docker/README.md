@@ -115,6 +115,16 @@ docker exec -it nginx-zero-downtime cat /etc/nginx/conf.d/zero-downtime.conf
 docker exec -it nginx-zero-downtime nginx -t
 ```
 
+### Now before we apply the new config, we'll run multiple curl request that will take ~30 seconds to complete and then we'll apply the config. If we are successful then the request that are on going won't be affected but all new request will be going to the new container.
+```
+curl zero-downtime.local/delay/45000
+```
+This endpoint output result after a delay. We are setting the delay to 45 seconds.
+
+### Now we'll reload the nginx config
+```
+docker exec -it nginx-zero-downtime nginx -s reload
+```
 ### After the reload even before the delay calls are successful if we request the domain. We'll see that it is sending request to only v2.
 ```
 for i in {1..10}
@@ -123,16 +133,7 @@ do
 done
 ```
 
-### Now before we apply the new config, we'll run multiple curl request that will take ~30 seconds to complete and then we'll apply the config. If we are successful then the request that are on going won't be affected but all new request will be going to the new container.
-```
-curl zero-downtime.local/delay/60000
-```
-This endpoint output result after a delay. We are setting the delay to 1 min.
-
-### Now we'll reload the nginx config
-```
-docker exec -it nginx-zero-downtime nginx -s reload
-```
+### When the delayed calls are finished, notice that even though we've reloaded nginx our call to the v1 container didn't drop and finished properly
 
 ### Now we can just remove the old entry from our config file
 ```
@@ -149,7 +150,7 @@ docker exec -it nginx-zero-downtime cat /etc/nginx/conf.d/zero-downtime.conf
 docker exec -it nginx-zero-downtime nginx -t
 docker exec -it nginx-zero-downtime nginx -s reload
 ```
-### Now we can stop the old container.
+### Now we can stop and remove the old container.
 ```
 docker stop $old_container_id
 docker rm $old_container_id
@@ -179,9 +180,20 @@ docker stop $old_container_id
 docker rm $old_container_id
 ```
 
+### Cleanup (Optional)
+Do these to remove all the things that we've done in this
+```
+docker stop basic-api-2
+docker rm basic-api-2
+docker stop nginx-zero-downtime
+docker rm nginx-zero-downtime
+docker network rm zero-downtime
+```
+
 ## My Setup
 For this I'm using a windows machine. All my commands are run in WSL. Here are the docker versions
 ```
 Client: Docker Engine - Community   - Version: 20.10.14
 Server: Docker Desktop - Engine     - Version: 20.10.21
 ```
+
