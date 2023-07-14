@@ -1,3 +1,14 @@
+# Zero Downtime Deployment with Nginx and Docker
+## Purpose
+I wanted to try out zero downtime deployment otherwise the blue-green deployment. This will help me understand how to do very basic no downtime deployment when using nginx as reverse proxy and basic docker containers as my deployed app.
+
+
+## Steps
+### We need to make an entry in the `hosts` file so that our traffic in `zero-downtime.local` is routed to the nginx. So edit the file `nano /etc/hosts` and enter this
+```
+127.0.0.1 zero-downtime.local
+```
+
 ### Create a network to try out this
 ```
 docker network create zero-downtime
