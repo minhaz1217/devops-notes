@@ -2,9 +2,17 @@
 ## Purpose
 I wanted to try out zero downtime deployment otherwise the blue-green deployment. This will help me understand how to do very basic no downtime deployment when using nginx as reverse proxy and basic docker containers as my deployed app.
 
+## TL;DR Steps
+* Start a container that is our v1.
+* Configure nginx to route traffic to that container using proxy pass and check that it is working.
+* Start another container that is our v2.
+* Configure nginx to route traffic to the v2 container and mark the v1 container as down.
+* Test and verify that during the switch our existing connection to the v1 didn't drop.
+* Remove the v1 entry from the nginx configuration.
+* To edit the nginx configuration I use a #placeholder in the config.
 
 ## Steps
-### We need to make an entry in the `hosts` file so that our traffic in `zero-downtime.local` is routed to the nginx. So edit the file `nano /etc/hosts` and enter this
+### We need to make an entry in the `hosts` file so that our traffic in `zero-downtime.local` is routed to the nginx. So edit the file `/etc/hosts`(for linux) or `C:\Windows\System32\drivers\etc\hosts` (for windows) and enter this
 ```
 127.0.0.1 zero-downtime.local
 ```
@@ -25,7 +33,7 @@ docker cp ./zero-downtime.conf nginx-zero-downtime:/etc/nginx/conf.d
 
 ### Start up the container that we want to route traffic to (later we'll mark it blue when we start another container)
 ```
-docker run -dit --name basic-api-1 --network zero-downtime minhaz1217/basic_go_api
+docker run -dit --name basic-api-1 --network zero-downtime minhaz1217/basic_go_api:v1
 ```
 
 ### Get the current latest container id and replace the string inside the conf file
@@ -169,4 +177,11 @@ docker exec -it nginx-zero-downtime nginx -t
 docker exec -it nginx-zero-downtime nginx -s reload
 docker stop $old_container_id
 docker rm $old_container_id
+```
+
+## My Setup
+For this I'm using a windows machine. All my commands are run in WSL. Here are the docker versions
+```
+Client: Docker Engine - Community   - Version: 20.10.14
+Server: Docker Desktop - Engine     - Version: 20.10.21
 ```
