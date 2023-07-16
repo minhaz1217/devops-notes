@@ -69,6 +69,8 @@ It should return the container id.
 ```
 docker run -dit --name basic-api-2 --network zero-downtime minhaz1217/basic_go_api:v2
 ```
+![both containers are running](https://github.com/minhaz1217/devops-notes/blob/c0870351995debd1794209adf15bf7051df11e34/55.%20zero%20downtime%20deployment%20with%20nginx%20and%20docker/images/01.png?raw=true)
+*Both containers are running.*
 
 ### We'll change nginx config so that it will route to the new container along with the old container
 ```
@@ -98,6 +100,8 @@ done
 ```
 We can see that both v1 and v2 is being routed to.
 
+![both containers are running](https://github.com/minhaz1217/devops-notes/blob/c0870351995debd1794209adf15bf7051df11e34/55.%20zero%20downtime%20deployment%20with%20nginx%20and%20docker/images/02.png?raw=true)
+*Both containers are being routed to*
 ### Now we'll mark the v1 as down.
 ```
 service_name=basic-api
@@ -109,6 +113,9 @@ docker exec -it nginx-zero-downtime  sed -i "s/server $old_container_id:3000;/se
 ```
 docker exec -it nginx-zero-downtime cat /etc/nginx/conf.d/zero-downtime.conf
 ```
+
+![the old container is marked as down](https://github.com/minhaz1217/devops-notes/blob/c0870351995debd1794209adf15bf7051df11e34/55.%20zero%20downtime%20deployment%20with%20nginx%20and%20docker/images/03.png?raw=true)
+*The old container is marked as down*
 
 ### Now we'll check that our nginx config is correct
 ```
@@ -132,6 +139,10 @@ do
     curl zero-downtime.local
 done
 ```
+![Right after the config is applied all the requests are being routed to v2](https://github.com/minhaz1217/devops-notes/blob/c0870351995debd1794209adf15bf7051df11e34/55.%20zero%20downtime%20deployment%20with%20nginx%20and%20docker/images/04.png?raw=true)
+*Right after the config is applied all the requests are being routed to v2*
+
+
 
 ### When the delayed calls are finished, notice that even though we've reloaded nginx our call to the v1 container didn't drop and finished properly
 
