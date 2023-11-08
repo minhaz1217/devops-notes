@@ -32,7 +32,7 @@ for (let line of lines.split("\n")) {
   }
 }
 
-output += `public ${sutName}Test(){\n`;
+output += `\t\t\t\tpublic ${sutName}Test(){\n`;
 
 for (let line of lines.split("\n")) {
   if (line.trim() !== "") {
@@ -40,11 +40,11 @@ for (let line of lines.split("\n")) {
     /* console.log(splitted[splitted.length -2]); */
     splitted[splitted.length - 2] = `Mock<${splitted[splitted.length -2]}>`;
     splitted[splitted.length - 1] = splitted[splitted.length - 1].replace(";", "")
-    output += `${splitted[splitted.length-1]} = new ${splitted[splitted.length -2]}();\n`;
+    output += `\t\t\t\t\t\t\t\t${splitted[splitted.length-1]} = new ${splitted[splitted.length -2]}();\n`;
   }
 }
 
-output += "}\n\n";
+output += "\t\t\t\t}\n\n";
 
 let constructorObjects = [];
 for (let line of lines.split("\n")) {
