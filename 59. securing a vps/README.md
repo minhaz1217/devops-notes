@@ -72,3 +72,65 @@ PermitRootLogin no
 ```
 
 Now try to login via root and is should be disabled
+
+## Installing Fail2Ban
+
+```
+sudo apt install fail2ban
+```
+
+### Copy the config
+```
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+```
+
+### Edit the file
+```
+sudo nano /etc/fail2ban/jail.local
+```
+
+### Find this section
+```
+[sshd]
+```
+
+### Change the file to reflect like this.
+```
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+maxretry = 3
+findtime = 5m
+bantime  = 30m
+```
+
+### Restart fail2ban
+```
+sudo service fail2ban restart
+```
+
+### To verify that fail2ban is running use this
+```
+sudo fail2ban-client status
+```
+### It should show something like this
+```
+Status
+|- Number of jail:      1
+`- Jail list:   sshd
+
+```
+if it shows this error
+
+`ERROR   Failed to access socket path: /var/run/fail2ban/fail2ban.sock. Is fail2ban running?`
+
+try running this
+```
+sudo fail2ban-client start
+```
+
+### If everything is ok then enable fail2ban to start on boot
+```
+sudo systemctl enable fail2ban
+```
