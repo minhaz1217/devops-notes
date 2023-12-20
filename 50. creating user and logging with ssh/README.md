@@ -18,6 +18,13 @@ Enter a custom filename if needed.
 ### Now enter the content of `*.pub` into the `~/.ssh/authorized_keys` file
 `nano ~/.ssh/authorized_keys`
 
+it may throw `no such file or directory` to resolve this `.ssh` folder should be created
+
+```
+mkdir ~/.ssh
+touch ~/.ssh/authorized_keys
+```
+
 ### Now you can connect to the host machine using this command
 `ssh -i .\<private_key> user_name@host_ip`
 
