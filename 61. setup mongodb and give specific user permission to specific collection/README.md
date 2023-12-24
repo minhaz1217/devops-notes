@@ -7,7 +7,7 @@ As a result it will increase security of the db.
 
 ### Install mongodb
 ```
-docker run -dit --name mongo -p 17017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=mongoAdmin33 mongo
+docker run -dit --name mongo -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=mongoAdmin33 mongo
 ```
 ### Go into the docker container's mongosh
 ```
@@ -34,6 +34,7 @@ admin    102 kB
 config  12.3 kB
 local   73.7 kB
 ```
+![show dbs output](<images/01. show dbs output.png>)
 
 ### Switch to a db using
 ```
@@ -44,6 +45,7 @@ output -
 switched to db appleCollection
 appleCollection>
 ```
+![after changing the db](<images/02. after changing db.png>)
 
 ### Insert some data
 ```
@@ -71,6 +73,8 @@ output -
   }
 }
 ```
+![show dbs output](<images/03. after data inserted.png>)
+
 ### Create an user and give him read write access for only this collection
 ```
 db.createUser(
@@ -85,6 +89,7 @@ It should say
 ```
 { ok: 1 }
 ```
+
 ### Exit from the current mongosh using
 ```
 exit
@@ -124,13 +129,27 @@ db.createUser(
 ### Now exit and login to that user using
 ```
 exit
-docker exec -it mongo2 bash -c "mongosh mongodb://multiAdmin:multiAdminPass@localhost:27017/?authSource=admin"
+docker exec -it mongo bash -c "mongosh mongodb://multiAdmin:multiAdminPass@localhost:27017/?authSource=admin"
 ```
 
 ### See the dbs and notice that this user can only see 2 dbs;
 ```
 show dbs;
 ```
+
+### Select data from this db.
+```
+db.apples.find({});
+```
+output - 
+```
+[
+  { _id: ObjectId("658893c3b2913cd097ebfd7c"), title: 'Green Apple' },
+  { _id: ObjectId("658893c3b2913cd097ebfd7d"), title: 'Red Apple' },
+  { _id: ObjectId("658893c3b2913cd097ebfd7e"), title: 'Black Apple' }
+]
+```
+![Alt text](<images/06. db find command.png>)
 
 ### To remove an user use this
 ```
