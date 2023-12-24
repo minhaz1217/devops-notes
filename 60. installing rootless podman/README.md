@@ -7,6 +7,8 @@ Here I will be installing rootless podman, which will allow podman to run from a
 ## Create an user that will run rootless podman
 `sudo adduser rootless_podman`
 
+
+
 ## Execute these commands as a sudoer
 ```
 sudo apt-get update
