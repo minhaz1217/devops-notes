@@ -73,7 +73,7 @@ output -
   }
 }
 ```
-![show dbs output](<images/03. after data inserted.png>)
+![after inserting data](<images/03. after data inserted.png>)
 
 ### Create an user and give him read write access for only this collection
 ```
@@ -89,6 +89,7 @@ It should say
 ```
 { ok: 1 }
 ```
+![after creating user](<images/04. after creating user.png>)
 
 ### Exit from the current mongosh using
 ```
@@ -106,9 +107,23 @@ Please notice that we are using `appleCollection` as the auth source.
 show dbs;
 ```
 Only one db should be visible.
+![show dbs output](<images/05. show dbs using different user.png>)
+
+
+### Select data from this db.
 ```
-appleCollection  41 kB
+db.apples.find({});
 ```
+output - 
+```
+[
+  { _id: ObjectId("658893c3b2913cd097ebfd7c"), title: 'Green Apple' },
+  { _id: ObjectId("658893c3b2913cd097ebfd7d"), title: 'Red Apple' },
+  { _id: ObjectId("658893c3b2913cd097ebfd7e"), title: 'Black Apple' }
+]
+```
+![find data](<images/06. db find command.png>)
+
 
 ### To create an user and give him access to multiple dbs use this
 ```
@@ -136,20 +151,6 @@ docker exec -it mongo bash -c "mongosh mongodb://multiAdmin:multiAdminPass@local
 ```
 show dbs;
 ```
-
-### Select data from this db.
-```
-db.apples.find({});
-```
-output - 
-```
-[
-  { _id: ObjectId("658893c3b2913cd097ebfd7c"), title: 'Green Apple' },
-  { _id: ObjectId("658893c3b2913cd097ebfd7d"), title: 'Red Apple' },
-  { _id: ObjectId("658893c3b2913cd097ebfd7e"), title: 'Black Apple' }
-]
-```
-![Alt text](<images/06. db find command.png>)
 
 ### To remove an user use this
 ```
