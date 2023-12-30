@@ -61,3 +61,12 @@ docker logs fluent-bit
 ```
 Notice that the logs are different.
 ![Config change worked](<images/02. docker logs to check config.png>)
+
+
+## References
+1. [https://github.com/minhaz1217/devops-notes/tree/master/65.%20setting%20up%20fluent%20bit%20with%20docker](https://github.com/minhaz1217/devops-notes/tree/master/65.%20setting%20up%20fluent%20bit%20with%20docker)
+2. [https://docs.fluentbit.io/manual/installation/docker](https://docs.fluentbit.io/manual/installation/docker)
+
+## Published
+1. [https://medium.com/@minhaz1217/setting-up-fluent-bit-using-docker-00ee1e19b888](https://medium.com/@minhaz1217/setting-up-fluent-bit-using-docker-00ee1e19b888)
+2. [https://dev.to/minhaz1217/setting-up-fluent-bit-using-docker-67n](https://dev.to/minhaz1217/setting-up-fluent-bit-using-docker-67n)
