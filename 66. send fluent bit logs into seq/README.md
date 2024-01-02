@@ -112,3 +112,8 @@ docker restart fluent-bit
 Now browse to `localhost:8080` and login into Seq using username=admin password=seqPass%% and see that the logs are being written into Seq
 
 ![Fluent bit is sending message to seq](<images/06. fluent bit is sending message to seq.png>)
+
+
+## Published
+1. [Dev.to](https://dev.to/minhaz1217/send-fluent-bit-collected-logs-to-seq-ahb)
+2. [Medium](https://medium.com/@minhaz1217/sending-fluent-bit-collected-logs-to-seq-0ddf01d6dc24)
