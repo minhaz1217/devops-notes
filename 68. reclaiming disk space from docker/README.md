@@ -1,0 +1,42 @@
+# Purpose
+Currently my `.vhdx` file is at 97GB. The file is located in the `%USERPROFILE%\AppData\Local\Docker\wsl\data\ext4.vhdx` folder
+I have cleared all the unused images and containers. Still the size remains this high. So here I'll clear it.
+
+After the cleanup the file is only ~20GB. So I've reclaimed ~75GB of my ssd's space.
+
+# Steps
+
+
+### At first see the list
+```
+wsl --list -v
+```
+
+
+### Run this command and make sure that all of them are shut down
+```
+wsl  --shutdown
+```
+
+### Run this to create a backup for all the current data
+```
+wsl --export docker-desktop-data "D:\docker-desktop-data.tar"
+```
+
+### Run this to unregister all the wsls
+```
+wsl --unregister docker-desktop-data
+wsl --unregister docker-desktop
+wsl --unregister Ubuntu
+```
+
+### The .vhdx file should get removed automatically
+
+### Run this to create new .vhdx file from the backup
+```
+wsl --import docker-desktop-data "C:\Users\HA HA\AppData\Local\Docker\wsl\data" "E:\docker-desktop-data.tar" --version 2
+```
+
+
+# Reference
+1. https://stackoverflow.com/questions/62441307/how-can-i-change-the-location-of-docker-images-when-using-docker-desktop-on-wsl2
