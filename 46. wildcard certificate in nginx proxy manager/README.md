@@ -24,7 +24,7 @@ value >> the value we just copied
 
 ## Use this to `verify` that your TXT record change has been propagated.
 ```
-nslookup -type=TXT _acme-challenge.minhazul.com`
+nslookup -type=TXT _acme-challenge.minhazul.com
 ```
 
 ## After it is verified, press enter on the console. and it will ask to create a file
@@ -131,6 +131,7 @@ if it shows root or any other user other than the one that is running the contai
 
 
 ```
+sudo chown rootless_podman  ~/database/nginx_proxymanager/custom_ssl/npm-1
 sudo chown rootless_podman  ~/database/nginx_proxymanager/custom_ssl/npm-1/fullchain.pem
 sudo chown rootless_podman  ~/database/nginx_proxymanager/custom_ssl/npm-1/privkey.pem
 ```
