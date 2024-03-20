@@ -54,13 +54,19 @@ The purpose of this is to preview a rendered liquid template file combined with 
 
 ![connect data.json](<images/02. connect data.json.png>)
 
-### It should open a preview with the html file connected with the data. Click on the window and press `CTRL + SHIFT + P` again and select the `HTML: Open Preview` option
+### Click on the window and press `CTRL + SHIFT + P` again and select the `HTML: Open Preview` option
 
-![select the generated html file and select open preview](<images/03. compiled html file with the data.png>)
+![data connected html sample](<images/03. compiled html file with the data.png>)
+
+### Click on the window and press `CTRL + SHIFT + P` again and select the `HTML: Open Preview` option
+![select the generated html file and select open preview](<images/04 select the html preview option.png>)
+
+
+
 
 ### This should generate the necessary html preview.
+![Rendered html page](<images/05. render the html file in vscode.png>)
 
-![Generated html file](<images/04. render the html file in vscode.png>)
 
 ## References
 1. [Shopify Liquid Preview](https://marketplace.visualstudio.com/items?itemName=kirchner-trevor.shopify-liquid-preview)
