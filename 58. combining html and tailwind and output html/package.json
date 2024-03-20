@@ -1,0 +1,35 @@
+{
+  "name": "getting-started-using-a-configuration",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "serve src",
+    "tailwind-dev": "tailwindcss -i ./src/tailwind.css -o ./src/output.css --watch",
+    "dev": "npm run live-server-dev & npm run tailwind-dev",
+    "dev-build": "tailwindcss -i ./src/tailwind.css -o ./src/output.css --minify",
+    "live-server-dev": "live-server --port=3001 src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "html-inline-css-webpack-plugin": "^1.11.2",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "raw-loader": "^4.0.2",
+    "serve": "^12.0.0",
+    "style-loader": "^3.3.3",
+    "tailwindcss": "^3.3.5",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
