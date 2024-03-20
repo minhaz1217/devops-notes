@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Liquid Template Instantly in vscode</title>
+</head>
+
+<body>
+    <div style="width:100%; text-align: center;">
+        <h1>Greetings from {{name}}</h1>
+        <h2>{{post.title}}</h2>
+        <h3>{{post.description}}</h3>
+        {%- if conditional.enabled -%}
+        <p>This section is only visible when conditional is enabled</p>
+        {%- endif -%}
+    </div>
+</body>
+
+</html>

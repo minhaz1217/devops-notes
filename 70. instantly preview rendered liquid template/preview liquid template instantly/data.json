@@ -1,0 +1,10 @@
+{
+  "name": "Minhazul Hayat Khan",
+  "post": {
+    "title": "Preview Liquid Template instantly in vscode",
+    "description": "This uses 2 vscode extensions to directly preview the liquid template with data connected"
+  },
+  "conditional": {
+    "enabled": true
+  }
+}
