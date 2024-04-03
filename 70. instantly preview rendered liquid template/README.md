@@ -1,6 +1,8 @@
 # Purpose
 The purpose of this is to preview a rendered liquid template file combined with data inside vscode.
 
+![intent](<images/00. intent.png>)
+
 # Steps
 
 ### At first install these 2 extensions in vscode
@@ -49,7 +51,7 @@ The purpose of this is to preview a rendered liquid template file combined with 
 
 ```
 
-### Press `CTRL + SHIFT + P` and select `Shopify Liquid: Open Preview to the side` option and select the `data.json` file
+### In the html file Press `CTRL + SHIFT + P` and select `Shopify Liquid: Open Preview to the side` option and select the `data.json` file
 ![select open preview to the side](<images/01. select open preview to the side.png>)
 
 ![connect data.json](<images/02. connect data.json.png>)
@@ -72,3 +74,7 @@ The purpose of this is to preview a rendered liquid template file combined with 
 1. [Shopify Liquid Preview](https://marketplace.visualstudio.com/items?itemName=kirchner-trevor.shopify-liquid-preview)
 
 2. [HTML Preview](https://marketplace.visualstudio.com/items?itemName=george-alisson.html-preview-vscode)
+
+## Published
+1. [https://medium.com/@minhaz1217/instantly-preview-rendered-liquid-template-4ca238d33e46](https://medium.com/@minhaz1217/instantly-preview-rendered-liquid-template-4ca238d33e46)
+2. [https://dev.to/minhaz1217/instantly-preview-rendered-liquid-template-5m7](https://dev.to/minhaz1217/instantly-preview-rendered-liquid-template-5m7)
