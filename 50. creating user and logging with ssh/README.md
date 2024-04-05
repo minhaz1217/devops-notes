@@ -1,7 +1,10 @@
 # Purpose
 Here we will add a new user and create ssh files so that that user can login to remove pc via ssh.
 
+
 # Steps
+## All of the commands are working in ubuntu 22.04
+
 ### At first create a new user using
 `sudo adduser user_name`
 
@@ -65,3 +68,41 @@ touch ~/.ssh/authorized_keys
 ### Change the `private_key` name if your private key is saved with different name.
 
 ### Now open a powershell in the same directory and run `change_permission.ps1`
+
+
+# Disable  password login
+
+### Edit this file
+```
+sudo nano /etc/ssh/sshd_config
+```
+
+### Search for these keys and make sure the boolean matches, all of these should be set to `no`
+```
+PasswordAuthentication no
+PermitRootLogin no
+UsePAM no
+ChallengeResponseAuthentication no
+```
+
+### Reload the ssh settings using this.
+```
+sudo systemctl reload ssh
+```
+
+### Search for the settings using this.
+```
+sudo sshd -T | grep -E -i 'ChallengeResponseAuthentication|PasswordAuthentication|UsePAM|PermitRootLogin'
+```
+
+### It should output something like this
+```
+usepam no
+permitrootlogin no
+passwordauthentication no
+```
+
+if after doing everything the settings aren't working, check the files in this directory
+```
+ls /etc/ssh/sshd_config.d
+```
