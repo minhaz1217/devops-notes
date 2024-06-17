@@ -19,19 +19,19 @@ wsl  --shutdown <name>
 
 wsl --shutdown docker-desktop-data
 wsl --shutdown docker-desktop
-wsl --shutdown Ubuntu
 ```
 
 ### Run this to create a backup for all the current data
 ```
 wsl --export docker-desktop-data "D:\docker-desktop-data.tar"
+wsl --export docker-desktop "D:\docker-desktop.tar"
 ```
+wsl --export docker-desktop "D:\docker-desktop-optimized.tar"
 
-### Run this to unregister all the wsls
+### Run this to unregister all the wsls ( this will also remove the .vhdx)
 ```
 wsl --unregister docker-desktop-data
 wsl --unregister docker-desktop
-wsl --unregister Ubuntu
 ```
 
 ### The .vhdx file should get removed automatically
@@ -41,6 +41,13 @@ wsl --unregister Ubuntu
 wsl --import docker-desktop-data "C:\Users\HA HA\AppData\Local\Docker\wsl\data" "D:\docker-desktop-data.tar" --version 2
 ```
 this will take the .tar file from D drive and create a .vhdx file in C drive.
+
+### Use existing .vhdx
+```
+wsl --import-in-place docker-desktop G:\DockerDesktopWSL\disk\docker_data.vhdx
+```
+
+
 
 # Reference
 1. https://stackoverflow.com/questions/62441307/how-can-i-change-the-location-of-docker-images-when-using-docker-desktop-on-wsl2
