@@ -1,3 +1,5 @@
+# How to use log4j in a java spring boot gradle project
+
 ## Motivation
 
 The motivation here is that I've spent just too much time trying to figure out how to add logging with log4j in spring boot in **gradle**. Here the gradle part was the one giving me the most grief because all the documentations I could find was for maven.
@@ -56,6 +58,14 @@ The logger setup should work as expected. Notice the `Message:` part.
 
 ![Logging working](./images/02.%20logs%20working.png)
 
+You can find the project [here](https://github.com/minhaz1217/java-quarkus/tree/master/spring-boot-log4j)
+
 ## References
 
 1. (https://www.sentinelone.com/blog/started-quickly-spring-boot-logging/)[https://www.sentinelone.com/blog/started-quickly-spring-boot-logging/]
+2. (https://github.com/minhaz1217/devops-notes/tree/master/78.%20java%20spring%20boot%20use%20log4j%20in%20a%20gradle%20project)[https://github.com/minhaz1217/devops-notes/tree/master/78.%20java%20spring%20boot%20use%20log4j%20in%20a%20gradle%20project]
+3. [The dummy project](https://github.com/minhaz1217/java-quarkus/tree/master/spring-boot-log4j)
+
+#
+
+# Created By - [Minhazul Hayat Khan](https://github.com/minhaz1217)
