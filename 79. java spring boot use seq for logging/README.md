@@ -1,4 +1,6 @@
-# Java spring boot use seq for logging
+# Java Spring Boot use Seq for logging
+
+![Java Spring Boot use Seq for logging](<images/00. java spring boot use seq for logging.png>)
 
 ## Motivation
 
