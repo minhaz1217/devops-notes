@@ -1,0 +1,1 @@
+# Get bearer token automatically using postman

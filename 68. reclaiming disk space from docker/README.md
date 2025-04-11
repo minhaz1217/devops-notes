@@ -42,8 +42,11 @@ wsl --import docker-desktop-data "C:\Users\HA HA\AppData\Local\Docker\wsl\data" 
 ```
 this will take the .tar file from D drive and create a .vhdx file in C drive.
 
+
+wsl --import docker-desktop-data "G:\DockerDesktopWSL\disk" "D:\docker-desktop-optimized.tar" --version 2
 ### Use existing .vhdx
 ```
+try this first >> wsl --import-in-place docker-desktop-data G:\DockerDesktopWSL\disk\docker_data.vhdx
 wsl --import-in-place docker-desktop G:\DockerDesktopWSL\disk\docker_data.vhdx
 ```
 

@@ -35,3 +35,8 @@ The result looks like this, it also outputs the result from the db.
 Just thought that I'd post these configs here as a reference to someone who is doing reactive java with panache. As I've invested one of my weekends figuring this out as well as other things. I'll probably make a longer post on my journey as a Senior Software Engineer to debug a panache capability issue and how a junior might navigate these and what were my step by step thought process during this.
 
 I've learned all these because I kept asking myself "why wouldn't it work?" and it kept bothering me.
+
+### References
+1. [My own notes](https://github.com/minhaz1217/devops-notes/tree/master/72.%20enable%20mongodb%20query%20logging%20in%20panache%20for%20reactive%20java)
+2. [Quarkus docs](https://quarkus.io/guides/mongodb-panache#query-debugging)
+3. [A github discussion](https://github.com/quarkusio/quarkus/discussions/24290)
