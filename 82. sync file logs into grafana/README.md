@@ -31,7 +31,7 @@ docker run -dti --name fluent-bit --network fluent-bit_seq -v C:/Log:/log-root/ 
 ```
 
 <!-- working copy -->
-docker run -dti --name fluent-bit-selise --network fluent-bit_seq --mount source=selise-dev-log,target=/log-root,readonly -vC:/Log:/log-root2:ro -v ${projectRoot}:/fluent-bit/etc cr.fluentbit.io/fluent/fluent-bit -c /fluent-bit/etc/fluent-bit.yml
+docker run -dti --name fluent-bit-selise --network fluent-bit_seq --mount source=selise-dev-log,target=/log-root,readonly -vC:/Log:/log-root2:ro -v ${projectRoot}/fluent-bit-config:/fluent-bit/etc cr.fluentbit.io/fluent/fluent-bit -c /fluent-bit/etc/fluent-bit.yml
 <!--  -->
 
 
