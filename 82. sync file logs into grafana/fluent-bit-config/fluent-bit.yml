@@ -1,25 +1,72 @@
 parsers:
-  - name: ipex_parser
+  - name: parser_with_trace
+    format: regex
+    regex: '/^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) -- (?<logLevel>[^--]*) -- (?<application>[^--]*) -- (?<tenantId>[\w]{32})\|(?<traceId>[\w]{32}) ### (?<log>.*)/'
+    # regex: '/^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) -- (?<logLevel>[^--]*) -- (?<application>[^--]*) -- (?<log>.*)/'
+    time_key: time
+    # time_format: '%Y-%m-%d %H:%M:%S'
+    time_format: '%Y-%m-%d %H:%M:%S,%L'
+
+  - name: parser_without_trace
     format: regex
     regex: '/^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) -- (?<logLevel>[^--]*) -- (?<application>[^--]*) -- (?<log>.*)/'
     # regex: '/^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) -- (?<logLevel>[^--]*) -- (?<application>[^--]*) -- (?<log>.*)/'
     time_key: time
     # time_format: '%Y-%m-%d %H:%M:%S'
     time_format: '%Y-%m-%d %H:%M:%S,%L'
+    
 
 pipeline:
   inputs:
     - name: tail
       path: /log-root/business-pcx/dev-business-pcx/PCXWebService/PCXWebService.log
-      # read_from_head: true
+      multiline: on
+      parser_firstline: parser_with_trace
+
     - name: tail
-      path: /log-root2/PCXWebService/PCXWebService.log
-      parser: ipex_parser
+      path: /log-root/business-pcx/dev-business-pcx/PCXWebHost/PCXWebHost.log
+      multiline: on
+      parser_firstline: parser_with_trace
+
+    - name: tail
+      path: /log-root/storageservice/dev-blocks-storageservice-v22/StorageService/StorageService.log
+      multiline: on
+      parser_firstline: parser_with_trace
+      # read_from_head: true
+
+    - name: tail
+      path: /log-root/storageservice/dev-blocks-storageservice-win/StorageService/StorageService.log
+      multiline: on
+      parser_firstline: parser_without_trace
+      # read_from_head: true
+
+    - name: tail
+      path: /log-root/mailservice/dev-blocks-mailservice-v12/MailService/MailService.log
+      multiline: on
+      parser_firstline: parser_without_trace
+
+    - name: tail
+      path: /log-root/mailservice/dev-blocks-mailservice-win/MailServiceWindowsService/MailServiceWindowsService.log
+      multiline: on
+      parser_firstline: parser_with_trace
+
+    - name: tail
+      path: /log-root/identity/dev-blocks-identity-v20/Identity/Identity.log
+      multiline: on
+      parser_firstline: parser_without_trace
+
+
+    - name: tail
+      path: /log-root2/**/**/*.log
+      multiline: on
+      parser_firstline: parser_with_trace
       # read_from_head: true
     
     - name: tail
+      Mem_Buf_Limit: 5MB
       path: /log-root2/MyApp.log
-      parser: ipex_parser
+      multiline: on
+      parser_firstline: parser_with_trace
       # read_from_head: true
 
 
@@ -29,7 +76,7 @@ pipeline:
       port:   3100
       labels: agent=fluent-bit
       match: '*'
-      label_keys: $logLevel, $log, $application
+      label_keys: $logLevel, $log, $application, $tenantId, $traceId
 
     - name: stdout
       match: '*'
