@@ -1,3 +1,12 @@
+parsers:
+  - name: ipex_parser
+    format: regex
+    regex: '/^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) -- (?<logLevel>[^--]*) -- (?<application>[^--]*) -- (?<log>.*)/'
+    # regex: '/^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) -- (?<logLevel>[^--]*) -- (?<application>[^--]*) -- (?<log>.*)/'
+    time_key: time
+    # time_format: '%Y-%m-%d %H:%M:%S'
+    time_format: '%Y-%m-%d %H:%M:%S,%L'
+
 pipeline:
   inputs:
     - name: tail
@@ -5,7 +14,14 @@ pipeline:
       # read_from_head: true
     - name: tail
       path: /log-root2/PCXWebService/PCXWebService.log
+      parser: ipex_parser
       # read_from_head: true
+    
+    - name: tail
+      path: /log-root2/MyApp.log
+      parser: ipex_parser
+      # read_from_head: true
+
 
   outputs:
     - name: loki
@@ -13,6 +29,7 @@ pipeline:
       port:   3100
       labels: agent=fluent-bit
       match: '*'
+      label_keys: $logLevel, $log, $application
 
     - name: stdout
       match: '*'
