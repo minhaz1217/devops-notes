@@ -7,7 +7,7 @@ To achieve this we'll use fluent bit to watch over this file, then we'll send th
 ## Setup loki
 
 ```
-docker run -dit --name loki -p3100:3100 --network fluent-bit_seq grafana/loki:2.9.2
+docker run -dit --name loki -p3100:3100 -v $PROJECT_ROOT/loki/config/:/etc/loki/ -v $PROJECT_ROOT/loki/data:/tmp/loki --network fluent-bit_seq grafana/loki:3.4.1  --config.file=/etc/loki/loki-config.yaml
 ```
 
 ## Setup grafana
@@ -21,21 +21,21 @@ docker run -dit -p 3000:3000 --network fluent-bit_seq --name grafana -e "GF_INST
 ### Setup the config folder `fluent-bit-config folder` as the config folder
 
 ```
-set projectRoot $PWD
+set PROJECT_ROOT $PWD
 ```
 
 #### Lunch fluent bit with the configs
 
 ```
-docker run -dti --name fluent-bit --network fluent-bit_seq -v C:/Log:/log-root/ -v ${projectRoot}/fluent-bit-config:/fluent-bit/etc cr.fluentbit.io/fluent/fluent-bit -c /fluent-bit/etc/fluent-bit.yml
+docker run -dti --name fluent-bit --network fluent-bit_seq -v C:/Log:/log-root/ -v ${PROJECT_ROOT}/fluent-bit-config:/fluent-bit/etc cr.fluentbit.io/fluent/fluent-bit -c /fluent-bit/etc/fluent-bit.yml
 ```
 
 <!-- working copy -->
-docker run -dti --name fluent-bit-selise --network fluent-bit_seq --mount source=selise-dev-log,target=/log-root,readonly -vC:/Log:/log-root2:ro -v ${projectRoot}/fluent-bit-config:/fluent-bit/etc cr.fluentbit.io/fluent/fluent-bit -c /fluent-bit/etc/fluent-bit.yml
+docker run -dti --name fluent-bit-selise --network fluent-bit_seq --mount source=selise-dev-log,target=/log-root,readonly -vC:/Log:/log-root2:ro -v ${PROJECT_ROOT}/fluent-bit-config:/fluent-bit/etc cr.fluentbit.io/fluent/fluent-bit -c /fluent-bit/etc/fluent-bit.yml
 <!--  -->
 
 
-docker run -dti --name fluent-bit-selise --network fluent-bit_seq -vC:/Log:/log-root2:ro -v ${projectRoot}/fluent-bit-config:/fluent-bit/etc cr.fluentbit.io/fluent/fluent-bit -c /fluent-bit/etc/fluent-bit.yml
+docker run -dti --name fluent-bit-selise --network fluent-bit_seq -vC:/Log:/log-root2:ro -v ${PROJECT_ROOT}/fluent-bit-config:/fluent-bit/etc cr.fluentbit.io/fluent/fluent-bit -c /fluent-bit/etc/fluent-bit.yml
 
 
 ### (optional) To mount a network drive
