@@ -1,0 +1,33 @@
+logging {
+  level  = "info"
+  format = "logfmt"
+}
+
+livedebugging {
+  enabled = true
+}
+
+local.file_match "tmp" {
+  path_targets = [{"__path__" = "/log-root/MyApp.log"}]
+  sync_period = "1s"
+}
+
+
+loki.source.file "logs" {
+  targets    = local.file_match.tmp.targets
+  forward_to = [loki.echo.example.receiver]
+}
+
+loki.echo "example" { }
+
+
+loki.source.file "logs2" {
+  targets    = local.file_match.tmp.targets
+  forward_to = [loki.write.general_loki.receiver]
+}
+
+loki.write "general_loki" {
+    endpoint {
+        url = "http://loki:3100/loki/api/v1/push"
+    }
+}
