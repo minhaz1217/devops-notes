@@ -37,6 +37,10 @@ mkdir ~/test-mount
 ```
 sudo mount.cifs //[ip]/[location] ~/test-mount -o user=test_user
 ```
+alternative command is this, this includes the user that will be the owner of the mounted folders
+```
+sudo mount -t cifs -o username=${USER},password=${PASSWORD},uid=$(id -u),gid=$(id -g) //server-address/folder /mount/path/on/ubuntu
+```
 
 #### Now we can see that the folder was mounted properly
 
@@ -48,4 +52,9 @@ ls ~/test-mount
 
 ```
 sudo umount ~/test-mount
+```
+
+if there is a problem while unmounting, run this command to identify which process is using the files
+```
+lsof | grep ~/test-mount
 ```
