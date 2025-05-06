@@ -7,26 +7,67 @@ livedebugging {
   enabled = true
 }
 
-local.file_match "tmp" {
-  path_targets = [{"__path__" = "/log-root/MyApp.log"}]
-  sync_period = "1s"
+local.file_match "fileLocations" {
+  path_targets = [
+    {"__path__" = "/log-root/MyApp.log"},
+    {"__path__" = "/log-root/PCXWebService/PCXWebService.log"},
+  ]
+}
+
+loki.source.file "logToProcessor" {
+  targets    = local.file_match.fileLocations.targets
+  forward_to = [loki.process.process_logs.receiver]
+}
+
+loki.process "process_logs" {
+
+  stage.multiline {
+      firstline     = "^(?<time>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}) -- (?<logLevel>[^--]*) -- (?<application>[^--]*) -- (?<tenantId>[\\w]{32})\\|(?<traceId>[\\w]{32}) ### (?<log>.*)"
+      max_wait_time = "10s"
+  }
+
+  stage.regex {
+      expression = "^(?<time>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}) -- (?<logLevel>[^--]*) -- (?<application>[^--]*) -- (?<tenantId>[\\w]{32})\\|(?<traceId>[\\w]{32}) ### (?<log>.*)"
+  }
+
+  stage.labels {
+    values = {
+      logLevel = "",
+      level = "logLevel",
+      application = "",
+      tenantId = "",
+      traceId = "",
+      time = "",
+    }
+  }
+  stage.timestamp {
+      source = "time"
+      format = "2006-01-02 15:04:05,000"
+  }
+  stage.output {
+    source = "log"
+  }
+  forward_to = [loki.echo.consoleOutput.receiver, loki.write.loki.receiver]
 }
 
 
-loki.source.file "logs" {
-  targets    = local.file_match.tmp.targets
-  forward_to = [loki.echo.example.receiver]
-}
-
-loki.echo "example" { }
 
 
-loki.source.file "logs2" {
-  targets    = local.file_match.tmp.targets
-  forward_to = [loki.write.general_loki.receiver]
-}
 
-loki.write "general_loki" {
+// loki.source.file "logToOutputForwarder" {
+//   targets    = local.file_match.fileLocations.targets
+//   forward_to = [loki.echo.consoleOutput.receiver]
+// }
+
+
+// loki.source.file "logToLokiForwarder" {
+//   targets    = local.file_match.fileLocations.targets
+//   forward_to = [loki.write.loki.receiver]
+// }
+
+loki.echo "consoleOutput" { }
+
+loki.write "loki" {
     endpoint {
         url = "http://loki:3100/loki/api/v1/push"
     }
