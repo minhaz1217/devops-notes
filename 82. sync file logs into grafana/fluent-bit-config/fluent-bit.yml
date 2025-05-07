@@ -24,7 +24,7 @@ pipeline:
       parser_firstline: parser_with_trace
 
     - name: tail
-      path: /log-root/business-pcx/dev-business-pcx/PCXWebHost/PCXWebHost.log
+      path: /log-root/business-pcx/dev-business-pcx-win/PCXWebHost/PCXWebHost.log
       multiline: on
       parser_firstline: parser_with_trace
 
