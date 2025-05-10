@@ -106,3 +106,8 @@ if after doing everything the settings aren't working, check the files in this d
 ```
 ls /etc/ssh/sshd_config.d
 ```
+
+### If it Permissions 0664 for ** are too open. It is required that your private key files are NOT accessible by others.
+```
+chmod 400 <private_key> -f
+```
