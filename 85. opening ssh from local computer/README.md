@@ -2,10 +2,12 @@
 
 ## Purpose
 
-Here I'm showing how to open SSH from your local computer so that you can SSH into your local computer from a github pipeline.
+Here I'm showing how to open SSH from your local computer and ssh into it from another remote computer.
 
 
 ## Steps
+
+## Installing and enabling Open SSH
 
 #### Install ssh server in your WSL
 ```
@@ -27,44 +29,48 @@ if you don't have a user to login to, you can just create one using this command
 sudo adduser <username>
 ```
 
-#### Now go to [this](https://www.noip.com/) website and create an account to get dynamic dns
+## Installing zrok
 
-#### Install dynamic DNS client
+#### Run this command to install zrok
 ```
-sudo apt-get install ddclient
-```
-When prompted to enter data, just keep pressing enter we'll configure it using config file later.
-
-#### Use this command to update the config file
-```
-nano /etc/ddclient.conf
-``` 
-#### Add these
-```
-use=web
-ssl=yes
-daemon=300
-protocol=noip
-login={YOUR_EMAIL_HERE}
-password={YOUR_PASSWORD_HERE}
-<the host name that you got from noip.com>
+curl -sSf https://get.openziti.io/install.bash | sudo bash -s zrok
 ```
 
-#### Use this command to start the dynamic dns client
+#### After signing up to zrok, Go to [here](https://api-v1.zrok.io/) token
 ```
-ddclient
+zrok enable <token>
 ```
 
-#### Use this command to check if ddclient is up
+#### Now share your port 22 using this command
 ```
-ps -ef | grep ddclient
+zrok share private --headless --backend-mode tcpTunnel 127.0.0.1:22
+```
+
+#### To run it in headless mode, use this
+```
+zrok share private --headless --backend-mode tcpTunnel 127.0.0.1:22
+```
+
+#### On the server that you to ssh from use this
+```
+zrok access private <connection_token>
+```
+
+#### To make it run on background you can use this command
+```
+zrok access private --headless <connection_token> &
+```
+
+#### To make sure that you can communicate to the machine run this command
+```
+nc 127.0.0.1 9191
 ```
 
 #### Now you can access your local computer via ssh using this
 ```
-ssh <your user>@<hostname>
+ssh -i <private_key> 127.0.0.1 -p 9191 -l <user>
+
+example:
+
+ssh -i .\pkey 127.0.0.1 -p 9191 -l user
 ```
-
-
-## Reference
-* [https://www.baeldung.com/linux/ssh-server-dynamic-dns](https://www.baeldung.com/linux/ssh-server-dynamic-dns)
