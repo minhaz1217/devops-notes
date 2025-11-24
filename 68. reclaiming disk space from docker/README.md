@@ -23,6 +23,14 @@ wsl --list -v
 ```
 ![wsl list](<./images/01. wsl_list.png>)
 
+### To check where the virtual disk file is located, use this
+```
+(Get-ChildItem -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | Where-Object { $_.GetValue("DistributionName") -eq '<distribution-name>' }).GetValue("BasePath") + "\ext4.vhdx"
+
+
+dist_name = Ubuntu
+(Get-ChildItem -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | Where-Object { $_.GetValue("DistributionName") -eq $dist_name }).GetValue("BasePath") + "\ext4.vhdx"
+```
 
 ### Run this command and make sure that all of them are shut down
 ```
